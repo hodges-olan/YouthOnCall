@@ -16,6 +16,8 @@ public class JobsModel {
     private float pay;
     private int memberID;
     private int youthID;
+    private int estHours;
+    private int estMinutes;
     private String status;
 
     public JobsModel() {
@@ -67,6 +69,22 @@ public class JobsModel {
 
     public void setYouthID(int youthID) {
         this.youthID = youthID;
+    }
+
+    public int getEstHours() {
+        return estHours;
+    }
+
+    public void setEstHours(int estHours) {
+        this.estHours = estHours;
+    }
+
+    public int getEstMinutes() {
+        return estMinutes;
+    }
+
+    public void setEstMinutes(int estMinutes) {
+        this.estMinutes = estMinutes;
     }
 
     public String getStatus() {
