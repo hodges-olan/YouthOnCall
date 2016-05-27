@@ -5,6 +5,8 @@
  */
 package youthoncall;
 
+import View.MainMenuUI;
+
 /**
  *
  * @author co075oh
@@ -15,7 +17,7 @@ public class YouthOnCall {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new MainMenuUI().setVisible(true);
     }
     
 }
