@@ -59,7 +59,7 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         jMenuBar1.add(File);
 
-        About.setText("About");
+        About.setText("Help");
         About.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AboutActionPerformed(evt);
