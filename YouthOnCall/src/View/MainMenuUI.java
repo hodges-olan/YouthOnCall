@@ -31,8 +31,8 @@ public class MainMenuUI extends javax.swing.JFrame {
         File = new javax.swing.JMenu();
         Login = new javax.swing.JMenuItem();
         Exit = new javax.swing.JMenuItem();
-        About = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        Help = new javax.swing.JMenu();
+        About = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Youth OnCall");
@@ -48,7 +48,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
         File.add(Login);
 
-        Exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        Exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         Exit.setText("Exit");
         Exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,22 +59,22 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         jMenuBar1.add(File);
 
-        About.setText("Help");
+        Help.setText("Help");
+        Help.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HelpActionPerformed(evt);
+            }
+        });
+
+        About.setText("About");
         About.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AboutActionPerformed(evt);
             }
         });
+        Help.add(About);
 
-        jMenuItem1.setText("About");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        About.add(jMenuItem1);
-
-        jMenuBar1.add(About);
+        jMenuBar1.add(Help);
 
         setJMenuBar(jMenuBar1);
 
@@ -100,13 +100,13 @@ public class MainMenuUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_ExitActionPerformed
 
-    private void AboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutActionPerformed
+    private void HelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HelpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AboutActionPerformed
+    }//GEN-LAST:event_HelpActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void AboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutActionPerformed
         new AboutUI().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_AboutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,11 +144,11 @@ public class MainMenuUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu About;
+    private javax.swing.JMenuItem About;
     private javax.swing.JMenuItem Exit;
     private javax.swing.JMenu File;
+    private javax.swing.JMenu Help;
     private javax.swing.JMenuItem Login;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
