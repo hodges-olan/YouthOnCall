@@ -27,8 +27,6 @@ public class MainMenuUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        list1 = new java.awt.List();
-        list2 = new java.awt.List();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
         Login = new javax.swing.JMenuItem();
@@ -179,7 +177,5 @@ public class MainMenuUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem Login;
     private javax.swing.JMenuItem ViewJobs;
     private javax.swing.JMenuBar jMenuBar1;
-    private java.awt.List list1;
-    private java.awt.List list2;
     // End of variables declaration//GEN-END:variables
 }

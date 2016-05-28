@@ -2,8 +2,6 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="java.awt.List" name="list1">
-    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="File">
@@ -116,8 +114,4 @@
       </Group>
     </DimensionLayout>
   </Layout>
-  <SubComponents>
-    <Component class="java.awt.List" name="list2">
-    </Component>
-  </SubComponents>
 </Form>
