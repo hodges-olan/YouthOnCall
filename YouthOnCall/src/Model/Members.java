@@ -9,7 +9,7 @@ package Model;
  *
  * @author co075oh
  */
-public class MembersModel {
+public class Members {
     private int id;
     private String name;
     private String email;
@@ -18,8 +18,9 @@ public class MembersModel {
     private String state;
     private int zip;
     private String phone;
+    private boolean youth;
 
-    public MembersModel() {
+    public Members() {
     }
 
     public int getId() {
@@ -85,4 +86,13 @@ public class MembersModel {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public boolean isYouth() {
+        return youth;
+    }
+
+    public void setYouth(boolean youth) {
+        this.youth = youth;
+    }
+    
 }

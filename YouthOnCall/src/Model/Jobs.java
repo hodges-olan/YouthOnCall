@@ -9,7 +9,7 @@ package Model;
  *
  * @author co075oh
  */
-public class JobsModel {
+public class Jobs {
     private int id;
     private String name;
     private String description;
@@ -20,7 +20,7 @@ public class JobsModel {
     private int estMinutes;
     private String status;
 
-    public JobsModel() {
+    public Jobs() {
     }
 
     public int getId() {
