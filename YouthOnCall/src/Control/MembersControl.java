@@ -10,5 +10,25 @@ package Control;
  * @author co075oh
  */
 public class MembersControl {
+
+    public static void createMember() {
+        
+    }
+    
+    public static void updateMember() {
+        
+    }
+    
+    public static void retrieveMember() {
+        
+    }
+    
+    public static void retrieveAllMembers() {
+        
+    }
+    
+    public static void retrieveAllYouth() {
+        
+    }
     
 }

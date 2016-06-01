@@ -119,7 +119,7 @@ public class MainMenuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_AboutActionPerformed
 
     private void ViewMembersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewMembersActionPerformed
-        // TODO add your handling code here:
+        new MembersUI().setVisible(true);
     }//GEN-LAST:event_ViewMembersActionPerformed
 
     /**

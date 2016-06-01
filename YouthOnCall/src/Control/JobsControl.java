@@ -11,4 +11,24 @@ package Control;
  */
 public class JobsControl {
     
+    public static void createJob() {
+        
+    }
+    
+    public static void updateJob() {
+        
+    }
+    
+    public static void retrieveJob() {
+        
+    }
+    
+    public static void retrieveAllJobs() {
+        
+    }
+    
+    public static void updateJobStatus() {
+        
+    }
+    
 }
