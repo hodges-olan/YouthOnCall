@@ -27,12 +27,10 @@ public class MainMenuUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
+        MenuBar = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
         Login = new javax.swing.JMenuItem();
-        ViewJobs = new javax.swing.JMenuItem();
-        EditMembers = new javax.swing.JMenuItem();
-        EditJobs = new javax.swing.JMenuItem();
+        ViewMembers = new javax.swing.JMenuItem();
         Exit = new javax.swing.JMenuItem();
         Help = new javax.swing.JMenu();
         About = new javax.swing.JMenuItem();
@@ -51,22 +49,14 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
         File.add(Login);
 
-        ViewJobs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        ViewJobs.setText("View Your Jobs");
-        File.add(ViewJobs);
-
-        EditMembers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
-        EditMembers.setText("Edit Members");
-        EditMembers.addActionListener(new java.awt.event.ActionListener() {
+        ViewMembers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
+        ViewMembers.setText("View Members");
+        ViewMembers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditMembersActionPerformed(evt);
+                ViewMembersActionPerformed(evt);
             }
         });
-        File.add(EditMembers);
-
-        EditJobs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.SHIFT_MASK));
-        EditJobs.setText("Edit Jobs");
-        File.add(EditJobs);
+        File.add(ViewMembers);
 
         Exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         Exit.setText("Exit");
@@ -77,7 +67,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
         File.add(Exit);
 
-        jMenuBar1.add(File);
+        MenuBar.add(File);
 
         Help.setText("Help");
         Help.addActionListener(new java.awt.event.ActionListener() {
@@ -94,9 +84,9 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
         Help.add(About);
 
-        jMenuBar1.add(Help);
+        MenuBar.add(Help);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,7 +103,7 @@ public class MainMenuUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-        // TODO add your handling code here:
+        new LogonUI().setVisible(true);
     }//GEN-LAST:event_LoginActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
@@ -128,9 +118,9 @@ public class MainMenuUI extends javax.swing.JFrame {
         new AboutUI().setVisible(true);
     }//GEN-LAST:event_AboutActionPerformed
 
-    private void EditMembersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditMembersActionPerformed
+    private void ViewMembersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewMembersActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EditMembersActionPerformed
+    }//GEN-LAST:event_ViewMembersActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,13 +159,11 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem About;
-    private javax.swing.JMenuItem EditJobs;
-    private javax.swing.JMenuItem EditMembers;
     private javax.swing.JMenuItem Exit;
     private javax.swing.JMenu File;
     private javax.swing.JMenu Help;
     private javax.swing.JMenuItem Login;
-    private javax.swing.JMenuItem ViewJobs;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar MenuBar;
+    private javax.swing.JMenuItem ViewMembers;
     // End of variables declaration//GEN-END:variables
 }
