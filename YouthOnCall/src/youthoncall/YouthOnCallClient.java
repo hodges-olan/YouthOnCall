@@ -5,13 +5,13 @@
  */
 package youthoncall;
 
-import View.MainMenuUI;
+import Client.View.MainMenuUI;
 
 /**
  *
  * @author co075oh
  */
-public class YouthOnCall {
+public class YouthOnCallClient {
 
     /**
      * @param args the command line arguments

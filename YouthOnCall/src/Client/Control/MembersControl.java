@@ -3,31 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Control;
+package Client.Control;
 
 /**
  *
  * @author co075oh
  */
-public class JobsControl {
-    
-    public static void createJob() {
+public class MembersControl {
+
+    public static void createMember() {
         
     }
     
-    public static void updateJob() {
+    public static void updateMember() {
         
     }
     
-    public static void retrieveJob() {
+    public static void retrieveMember() {
         
     }
     
-    public static void retrieveAllJobs() {
+    public static void retrieveAllMembers() {
         
     }
     
-    public static void updateJobStatus() {
+    public static void retrieveAllYouth() {
         
     }
     
