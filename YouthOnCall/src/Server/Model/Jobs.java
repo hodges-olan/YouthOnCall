@@ -5,13 +5,13 @@
  */
 package Server.Model;
 
-import Client.Model.*;
-
 /**
  *
  * @author co075oh
  */
 public class Jobs {
+    
+    // Class Attributes
     private int id;
     private String name;
     private String description;
@@ -22,9 +22,23 @@ public class Jobs {
     private int estMinutes;
     private String status;
 
+    // Constructor Methods
     public Jobs() {
     }
 
+    public Jobs(int id, String name, String description, float pay, int memberID, int youthID, int estHours, int estMinutes, String status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.pay = pay;
+        this.memberID = memberID;
+        this.youthID = youthID;
+        this.estHours = estHours;
+        this.estMinutes = estMinutes;
+        this.status = status;
+    }
+    
+    // Getter and Setter Methods
     public int getId() {
         return id;
     }

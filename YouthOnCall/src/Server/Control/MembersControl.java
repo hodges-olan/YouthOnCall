@@ -5,7 +5,11 @@
  */
 package Server.Control;
 
-import Client.Control.*;
+import Server.Model.Members;
+import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -13,24 +17,47 @@ import Client.Control.*;
  */
 public class MembersControl {
 
-    public static void createMember() {
-        
+    public void createMember(SessionFactory sessionFactory, Members member) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(member);
+            session.getTransaction().commit();
+        }
     }
     
-    public static void updateMember() {
-        
+    public void updateMember(SessionFactory sessionFactory, Members member) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(member);
+            session.getTransaction().commit();
+        }
     }
     
-    public static void retrieveMember() {
-        
+    public Members retrieveMember(SessionFactory sessionFactory, Integer search) {
+        Members member;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            member = session.get(Members.class, search);
+        }
+        return member;
     }
     
-    public static void retrieveAllMembers() {
-        
+    public List<Members> retrieveAllMembers(SessionFactory sessionFactory) {
+        List<Members> members;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            members = session.createCriteria(Members.class).add( Restrictions.eq("youth", false) ).list();
+        }
+        return members;
     }
     
-    public static void retrieveAllYouth() {
-        
+    public List<Members> retrieveAllYouth(SessionFactory sessionFactory) {
+        List<Members> youth;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            youth = session.createCriteria(Members.class).add( Restrictions.eq("youth", true) ).list();
+        }
+        return youth;
     }
     
 }

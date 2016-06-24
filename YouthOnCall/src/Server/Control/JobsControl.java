@@ -5,7 +5,10 @@
  */
 package Server.Control;
 
-import Client.Control.*;
+import Server.Model.Jobs;
+import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
@@ -13,24 +16,38 @@ import Client.Control.*;
  */
 public class JobsControl {
     
-    public static void createJob() {
-        
+    public void createJob(SessionFactory sessionFactory, Jobs job) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(job);
+            session.getTransaction().commit();
+        }
     }
     
-    public static void updateJob() {
-        
+    public void updateJob(SessionFactory sessionFactory, Jobs job) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(job);
+            session.getTransaction().commit();
+        }
     }
     
-    public static void retrieveJob() {
-        
+    public Jobs retrieveJob(SessionFactory sessionFactory, Integer search) {
+        Jobs job;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            job = session.get(Jobs.class, search);
+        }
+        return job;
     }
     
-    public static void retrieveAllJobs() {
-        
-    }
-    
-    public static void updateJobStatus() {
-        
+    public List<Jobs> retrieveAllJobs(SessionFactory sessionFactory) {
+        List<Jobs> jobs;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            jobs = session.createCriteria(Jobs.class).list();
+        }
+        return jobs;
     }
     
 }

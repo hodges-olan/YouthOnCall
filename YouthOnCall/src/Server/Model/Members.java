@@ -5,13 +5,13 @@
  */
 package Server.Model;
 
-import Client.Model.*;
-
 /**
  *
  * @author co075oh
  */
 public class Members {
+    
+    // Class Attributes
     private int id;
     private String name;
     private String email;
@@ -22,9 +22,23 @@ public class Members {
     private String phone;
     private boolean youth;
 
+    // Constructor Methods
     public Members() {
     }
 
+    public Members(int id, String name, String email, String address, String city, String state, int zip, String phone, boolean youth) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phone = phone;
+        this.youth = youth;
+    }
+
+    // Getter and Setter Methods
     public int getId() {
         return id;
     }
