@@ -5,27 +5,53 @@
  */
 package Server.Model;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author co075oh
  */
-public class Jobs {
+@Entity
+public class Jobs implements Serializable {
     
     // Class Attributes
+    @Id
     private int id;
+    @Column (name="name")
     private String name;
+    @Column (name="description")
     private String description;
-    private float pay;
+    @Column (name="pay")
+    private double pay;
+    @Column (name="memberID")
     private int memberID;
+    @Column (name="youthID")
     private int youthID;
+    @Column (name="estHours")
     private int estHours;
+    @Column (name="estMinutes")
     private int estMinutes;
+    @Column (name="status")
     private String status;
 
     // Constructor Methods
     public Jobs() {
     }
 
+    public Jobs(int id, String name, String description, float pay, int memberID, int estHours, int estMinutes, String status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.pay = pay;
+        this.memberID = memberID;
+        this.estHours = estHours;
+        this.estMinutes = estMinutes;
+        this.status = status;
+    }
+    
     public Jobs(int id, String name, String description, float pay, int memberID, int youthID, int estHours, int estMinutes, String status) {
         this.id = id;
         this.name = name;
@@ -63,7 +89,7 @@ public class Jobs {
         this.description = description;
     }
 
-    public float getPay() {
+    public double getPay() {
         return pay;
     }
 

@@ -5,34 +5,49 @@
  */
 package Server.Model;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author co075oh
  */
-public class Members {
+@Entity
+public class Members implements Serializable {
     
     // Class Attributes
+    @Id
     private int id;
+    @Column (name="name")
     private String name;
+    @Column (name="email")
     private String email;
+    @Column (name="address")
     private String address;
+    @Column (name="city")
     private String city;
-    private String state;
-    private int zip;
+    @Column (name="st")
+    private String st;
+    @Column (name="zip")
+    private Integer zip;
+    @Column (name="phone")
     private String phone;
+    @Column (name="youth")
     private boolean youth;
 
     // Constructor Methods
     public Members() {
     }
 
-    public Members(int id, String name, String email, String address, String city, String state, int zip, String phone, boolean youth) {
+    public Members(int id, String name, String email, String address, String city, String st, int zip, String phone, boolean youth) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;
         this.city = city;
-        this.state = state;
+        this.st = st;
         this.zip = zip;
         this.phone = phone;
         this.youth = youth;
@@ -79,12 +94,12 @@ public class Members {
         this.city = city;
     }
 
-    public String getState() {
-        return state;
+    public String getSt() {
+        return st;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setSt(String st) {
+        this.st = st;
     }
 
     public int getZip() {

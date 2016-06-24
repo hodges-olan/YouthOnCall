@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="Jobs" table="jobs">
+    <class name="Server.Model.Jobs" table="jobs">
         <id name="id" type="int" column="id">
             <generator class="native"/>
         </id>
@@ -14,7 +14,7 @@
         <property name="estMinutes" column="estMinutes" type="int"/>
         <property name="status" column="status" type="string"/>
     </class>
-    <class name="Members" table="members">
+    <class name="Server.Model.Members" table="members">
         <id name="id" type="int" column="id">
             <generator class="native"/>
         </id>
@@ -23,7 +23,7 @@
         <property name="address" column="address" type="string"/>
         <property name="city" column="city" type="string"/>
         <property name="st" column="st" type="string"/>
-        <property name="zip" column="zip" type="string"/>
+        <property name="zip" column="zip" type="int"/>
         <property name="phone" column="phone" type="string"/>
         <property name="youth" column="youth" type="boolean"/>
     </class>

@@ -17,12 +17,14 @@ import org.hibernate.criterion.Restrictions;
  */
 public class MembersControl {
 
-    public void createMember(SessionFactory sessionFactory, Members member) {
+    public Integer createMember(SessionFactory sessionFactory, Members member) {
+        Integer memberID = 0;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.save(member);
+            memberID = (Integer) session.save(member);
             session.getTransaction().commit();
         }
+        return memberID;
     }
     
     public void updateMember(SessionFactory sessionFactory, Members member) {
