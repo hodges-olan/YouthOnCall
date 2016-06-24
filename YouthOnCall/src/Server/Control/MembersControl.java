@@ -18,7 +18,7 @@ import org.hibernate.criterion.Restrictions;
 public class MembersControl {
 
     public Integer createMember(SessionFactory sessionFactory, Members member) {
-        Integer memberID = 0;
+        Integer memberID;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             memberID = (Integer) session.save(member);
