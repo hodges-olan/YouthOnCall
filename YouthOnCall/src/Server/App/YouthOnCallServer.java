@@ -26,7 +26,7 @@ public class YouthOnCallServer {
             JobsControl jobsControl = new JobsControl();
             MembersControl membersControl = new MembersControl();
             
-            Members member = new Members(1, "Olan Hodges", "olanhodges@gmail.com", "3312 Westview Drive", "McKinney", "TX", 75070, "214-585-2561", false);
+            Members member = new Members(1, "Olan Hodges", "olanhodges@gmail.com", "3312 Westview Drive", "McKinney", "TX", 75070, "214-585-2561", false, "Test123!");
             member.setId(membersControl.createMember(sessionFactory, member));
             
             Jobs job = new Jobs(1, "Mowing and Edging", "Mow and edge both the front and back yard.", 20, member.getId(), 1, 0, "Active");
