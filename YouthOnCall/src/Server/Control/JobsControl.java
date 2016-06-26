@@ -16,12 +16,14 @@ import org.hibernate.SessionFactory;
  */
 public class JobsControl {
     
-    public void createJob(SessionFactory sessionFactory, Jobs job) {
+    public Integer createJob(SessionFactory sessionFactory, Jobs job) {
+        Integer jobID;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.save(job);
+            jobID = (Integer) session.save(job);
             session.getTransaction().commit();
         }
+        return jobID;
     }
     
     public void updateJob(SessionFactory sessionFactory, Jobs job) {
