@@ -29,7 +29,7 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         MenuBar = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
-        Login = new javax.swing.JMenuItem();
+        Logout = new javax.swing.JMenuItem();
         ViewMembers = new javax.swing.JMenuItem();
         Exit = new javax.swing.JMenuItem();
         Help = new javax.swing.JMenu();
@@ -40,14 +40,14 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         File.setText("File");
 
-        Login.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        Login.setText("Login");
-        Login.addActionListener(new java.awt.event.ActionListener() {
+        Logout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        Logout.setText("Logout");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginActionPerformed(evt);
+                LogoutActionPerformed(evt);
             }
         });
-        File.add(Login);
+        File.add(Logout);
 
         ViewMembers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
         ViewMembers.setText("View Members");
@@ -102,9 +102,9 @@ public class MainMenuUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
         new LogonUI().setVisible(true);
-    }//GEN-LAST:event_LoginActionPerformed
+    }//GEN-LAST:event_LogoutActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         System.exit(0);
@@ -162,7 +162,7 @@ public class MainMenuUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem Exit;
     private javax.swing.JMenu File;
     private javax.swing.JMenu Help;
-    private javax.swing.JMenuItem Login;
+    private javax.swing.JMenuItem Logout;
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenuItem ViewMembers;
     // End of variables declaration//GEN-END:variables

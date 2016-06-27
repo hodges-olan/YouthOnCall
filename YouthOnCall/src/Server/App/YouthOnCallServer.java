@@ -5,10 +5,13 @@
  */
 package Server.App;
 
-import Server.Control.MembersControl;
 import Server.Control.JobsControl;
-import Server.Model.Jobs;
-import Server.Model.Members;
+import Server.Control.MembersControl;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -18,21 +21,45 @@ import org.hibernate.cfg.Configuration;
  */
 public class YouthOnCallServer {
 
+    // Declare Executor Service
+    private static final int threadCount = 4;
+    private static final ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
+    
+    // Declare Session Factory
+    private static final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    
+    // Declare Controller Classes
+    private static final MembersControl membersControl = new MembersControl();
+    private static final JobsControl jobsControl = new JobsControl();
+    
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) {
-        try (SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory()) {
-            JobsControl jobsControl = new JobsControl();
-            MembersControl membersControl = new MembersControl();
-            
-            Members member = new Members(1, "Olan Hodges", "olanhodges@gmail.com", "3312 Westview Drive", "McKinney", "TX", 75070, "214-585-2561", false, "Test123!");
-            member.setId(membersControl.createMember(sessionFactory, member));
-            
-            Jobs job = new Jobs(1, "Mowing and Edging", "Mow and edge both the front and back yard.", 20, member.getId(), 1, 0, "Active");
-            jobsControl.createJob(sessionFactory, job);
-            
+    public static void main(String[] args) throws IOException {
+        
+        // Create Server Socket
+        ServerSocket serverSocket = new ServerSocket(7890);
+        
+        // Await client connections
+        while (true) {
+            Socket socket = serverSocket.accept();
+            executorService.submit(new ClientConnThread(socket));
         }
+        
+    }
+
+    // Getter Methods
+    public static int getThreadCount() {
+        return threadCount;
+    }
+
+    public static ExecutorService getExecutorService() {
+        return executorService;
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
     
 }

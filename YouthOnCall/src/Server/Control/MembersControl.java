@@ -5,6 +5,7 @@
  */
 package Server.Control;
 
+import Server.App.YouthOnCallServer;
 import Server.Model.Members;
 import java.util.List;
 import org.hibernate.Session;
@@ -17,7 +18,8 @@ import org.hibernate.criterion.Restrictions;
  */
 public class MembersControl {
 
-    public Integer createMember(SessionFactory sessionFactory, Members member) {
+    public Integer createMember(Members member) {
+        SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         Integer memberID;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
@@ -27,7 +29,8 @@ public class MembersControl {
         return memberID;
     }
     
-    public void updateMember(SessionFactory sessionFactory, Members member) {
+    public void updateMember(Members member) {
+        SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.update(member);
@@ -35,8 +38,9 @@ public class MembersControl {
         }
     }
     
-    public Members retrieveMember(SessionFactory sessionFactory, Integer search) {
+    public Members retrieveMember(Integer search) {
         Members member;
+        SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             member = session.get(Members.class, search);
@@ -44,8 +48,9 @@ public class MembersControl {
         return member;
     }
     
-    public List<Members> retrieveAllMembers(SessionFactory sessionFactory) {
+    public List<Members> retrieveAllMembers() {
         List<Members> members;
+        SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             members = session.createCriteria(Members.class).add( Restrictions.eq("youth", false) ).list();
@@ -53,8 +58,9 @@ public class MembersControl {
         return members;
     }
     
-    public List<Members> retrieveAllYouth(SessionFactory sessionFactory) {
+    public List<Members> retrieveAllYouth() {
         List<Members> youth;
+        SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             youth = session.createCriteria(Members.class).add( Restrictions.eq("youth", true) ).list();
@@ -62,4 +68,7 @@ public class MembersControl {
         return youth;
     }
     
+    public void authMember() {
+        SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
+    }
 }
