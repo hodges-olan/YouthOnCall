@@ -5,12 +5,20 @@
  */
 package Client.View;
 
+import Client.Control.MembersControl;
+
 /**
  *
  * @author co075oh
  */
 public class MembersUI extends javax.swing.JFrame {
 
+    // Define Controllers
+    private final MembersControl membersController = new MembersControl();
+    
+    // Define Table Columns
+    String[] columns = {"ID", "Name", "Email", "Address", "City", "State", "Zip", "Phone", "Youth/Member"};
+    
     /**
      * Creates new form MemberUI
      */
@@ -27,29 +35,38 @@ public class MembersUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MembersScrollPane = new javax.swing.JScrollPane();
+        MembersTable = new javax.swing.JTable();
+        MembersRefreshButton = new javax.swing.JButton();
+        AddMember = new javax.swing.JButton();
+        EditMember = new javax.swing.JButton();
         MenuBar = new javax.swing.JMenuBar();
         MembersMenu = new javax.swing.JMenu();
-        AddMember = new javax.swing.JMenuItem();
-        UpdateMember = new javax.swing.JMenuItem();
-        DeleteMember = new javax.swing.JMenuItem();
+        Close = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        MembersMenu.setText("Members");
+        MembersTable.setModel(new javax.swing.table.DefaultTableModel(
+            membersController.retrieveAllMembers(),
+            columns
+        ));
+        MembersScrollPane.setViewportView(MembersTable);
+
+        MembersRefreshButton.setText("Refresh");
 
         AddMember.setText("Add Member");
-        MembersMenu.add(AddMember);
 
-        UpdateMember.setText("Update Member");
-        MembersMenu.add(UpdateMember);
+        EditMember.setText("Edit Member");
 
-        DeleteMember.setText("Delete Member");
-        DeleteMember.addActionListener(new java.awt.event.ActionListener() {
+        MembersMenu.setText("Members");
+
+        Close.setText("Close");
+        Close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteMemberActionPerformed(evt);
+                CloseActionPerformed(evt);
             }
         });
-        MembersMenu.add(DeleteMember);
+        MembersMenu.add(Close);
 
         MenuBar.add(MembersMenu);
 
@@ -59,19 +76,37 @@ public class MembersUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(MembersScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(AddMember)
+                        .addGap(18, 18, 18)
+                        .addComponent(EditMember)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(MembersRefreshButton)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(MembersScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MembersRefreshButton)
+                    .addComponent(AddMember)
+                    .addComponent(EditMember))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DeleteMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteMemberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DeleteMemberActionPerformed
+    private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_CloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,10 +145,13 @@ public class MembersUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem AddMember;
-    private javax.swing.JMenuItem DeleteMember;
+    private javax.swing.JButton AddMember;
+    private javax.swing.JMenuItem Close;
+    private javax.swing.JButton EditMember;
     private javax.swing.JMenu MembersMenu;
+    private javax.swing.JButton MembersRefreshButton;
+    private javax.swing.JScrollPane MembersScrollPane;
+    private javax.swing.JTable MembersTable;
     private javax.swing.JMenuBar MenuBar;
-    private javax.swing.JMenuItem UpdateMember;
     // End of variables declaration//GEN-END:variables
 }

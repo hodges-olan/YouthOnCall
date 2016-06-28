@@ -11,24 +11,23 @@ package Client.Control;
  */
 public class JobsControl {
     
-    public static void createJob() {
+    public void createJob() {
         
     }
     
-    public static void updateJob() {
+    public void updateJob() {
         
     }
     
-    public static void retrieveJob() {
+    public void retrieveJob() {
         
     }
     
-    public static void retrieveAllJobs() {
-        
+    public Object[][] retrieveAllJobs() {
+        Object[][] jobs = {
+            {"22", "Mowing and Edging", "Mow and edge both the front and back yard.", "$20", "Olan Hodges", "None", "1 Hour", "Active"}
+        };
+        return jobs;
     }
-    
-    public static void updateJobStatus() {
-        
-    }
-    
+
 }

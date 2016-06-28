@@ -5,17 +5,25 @@
  */
 package Client.View;
 
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author co075oh
  */
 public class LogonUI extends javax.swing.JFrame {
-
+   
     /**
      * Creates new form LogonUI
      */
     public LogonUI() {
         initComponents();
+        AuthFailedLabel.setVisible(false);
     }
 
     /**
@@ -34,6 +42,7 @@ public class LogonUI extends javax.swing.JFrame {
         passwordLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
+        AuthFailedLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -77,6 +86,10 @@ public class LogonUI extends javax.swing.JFrame {
             }
         });
 
+        AuthFailedLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        AuthFailedLabel.setForeground(new java.awt.Color(204, 0, 51));
+        AuthFailedLabel.setText("Authentication Failed");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,12 +102,15 @@ public class LogonUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernameLabel)
-                            .addComponent(passwordLabel))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(password)
-                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(usernameLabel)
+                                    .addComponent(passwordLabel))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(password)
+                                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(AuthFailedLabel)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -115,18 +131,39 @@ public class LogonUI extends javax.swing.JFrame {
                     .addComponent(passwordLabel))
                 .addGap(18, 18, 18)
                 .addComponent(login)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(AuthFailedLabel)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        // TODO add your handling code here:
+        // Declare Socket, Input, and Output Streams
+        try (Socket socket = new Socket("127.0.0.1",7890)) {
+            boolean authenticated = false;
+            Scanner inputStream = new Scanner(socket.getInputStream());
+            PrintStream outputStream = new PrintStream(socket.getOutputStream());
+            outputStream.println("authMember");
+            outputStream.println(username.getText());
+            outputStream.println(password.getText());
+            authenticated = inputStream.nextBoolean();
+            if (authenticated == true) {
+                outputStream.close();
+                inputStream.close();
+                this.dispose();
+                new MainMenuUI().setVisible(true);
+            } else {
+                AuthFailedLabel.setVisible(true);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LogonUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_loginActionPerformed
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
+        loginActionPerformed(evt);
     }//GEN-LAST:event_passwordActionPerformed
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
@@ -135,8 +172,10 @@ public class LogonUI extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -165,6 +204,7 @@ public class LogonUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AuthFailedLabel;
     private javax.swing.JButton login;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel passwordLabel;

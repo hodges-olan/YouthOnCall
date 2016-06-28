@@ -11,23 +11,26 @@ package Client.Control;
  */
 public class MembersControl {
 
-    public static void createMember() {
+    public void createMember() {
         
     }
     
-    public static void updateMember() {
+    public void updateMember() {
         
     }
     
-    public static void retrieveMember() {
+    public void retrieveMember() {
         
     }
     
-    public static void retrieveAllMembers() {
-        
+    public Object[][] retrieveAllMembers() {
+        Object[][] members = {
+            {"22", "Olan Hodges", "olanhodges@gmail.com", "3312 Westview Drive", "McKinney", "TX", "75070", "214-585-2561", "Member"}
+        };
+        return members;
     }
     
-    public static void retrieveAllYouth() {
+    public void retrieveAllYouth() {
         
     }
     

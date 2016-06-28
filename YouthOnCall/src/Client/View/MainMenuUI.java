@@ -5,12 +5,21 @@
  */
 package Client.View;
 
+import Client.Control.JobsControl;
+import Client.Control.MembersControl;
+
 /**
  *
  * @author co075oh
  */
 public class MainMenuUI extends javax.swing.JFrame {
-
+    
+    // Define Controllers
+    private final JobsControl jobsController = new JobsControl();
+    
+    // Define Table Columns
+    String[] columns = {"ID", "Job", "Description", "Pay", "Member", "Youth", "Est. Time", "Status"};
+    
     /**
      * Creates new form MainMenuUI
      */
@@ -27,10 +36,14 @@ public class MainMenuUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JobsScrollPane = new javax.swing.JScrollPane();
+        JobsTable = new javax.swing.JTable();
+        JobsRefreshButton = new javax.swing.JButton();
+        AddJob = new javax.swing.JButton();
+        EditJob = new javax.swing.JButton();
         MenuBar = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
-        Logout = new javax.swing.JMenuItem();
-        ViewMembers = new javax.swing.JMenuItem();
+        Members = new javax.swing.JMenuItem();
         Exit = new javax.swing.JMenuItem();
         Help = new javax.swing.JMenu();
         About = new javax.swing.JMenuItem();
@@ -38,25 +51,33 @@ public class MainMenuUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Youth OnCall");
 
+        JobsTable.setModel(new javax.swing.table.DefaultTableModel(
+            jobsController.retrieveAllJobs(),
+            columns
+        ));
+        JobsScrollPane.setViewportView(JobsTable);
+
+        JobsRefreshButton.setText("Refresh");
+        JobsRefreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JobsRefreshButtonActionPerformed(evt);
+            }
+        });
+
+        AddJob.setText("Add Job");
+
+        EditJob.setText("Edit Job");
+
         File.setText("File");
 
-        Logout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        Logout.setText("Logout");
-        Logout.addActionListener(new java.awt.event.ActionListener() {
+        Members.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
+        Members.setText("Members");
+        Members.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutActionPerformed(evt);
+                MembersActionPerformed(evt);
             }
         });
-        File.add(Logout);
-
-        ViewMembers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
-        ViewMembers.setText("View Members");
-        ViewMembers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewMembersActionPerformed(evt);
-            }
-        });
-        File.add(ViewMembers);
+        File.add(Members);
 
         Exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         Exit.setText("Exit");
@@ -92,19 +113,33 @@ public class MainMenuUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JobsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(AddJob)
+                        .addGap(18, 18, 18)
+                        .addComponent(EditJob)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JobsRefreshButton)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 479, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JobsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JobsRefreshButton)
+                    .addComponent(AddJob)
+                    .addComponent(EditJob))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-        new LogonUI().setVisible(true);
-    }//GEN-LAST:event_LogoutActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         System.exit(0);
@@ -118,9 +153,16 @@ public class MainMenuUI extends javax.swing.JFrame {
         new AboutUI().setVisible(true);
     }//GEN-LAST:event_AboutActionPerformed
 
-    private void ViewMembersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewMembersActionPerformed
+    private void MembersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MembersActionPerformed
         new MembersUI().setVisible(true);
-    }//GEN-LAST:event_ViewMembersActionPerformed
+    }//GEN-LAST:event_MembersActionPerformed
+
+    private void JobsRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JobsRefreshButtonActionPerformed
+        JobsTable.setModel(new javax.swing.table.DefaultTableModel(
+            jobsController.retrieveAllJobs(),
+            columns
+        ));
+    }//GEN-LAST:event_JobsRefreshButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,11 +201,15 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem About;
+    private javax.swing.JButton AddJob;
+    private javax.swing.JButton EditJob;
     private javax.swing.JMenuItem Exit;
     private javax.swing.JMenu File;
     private javax.swing.JMenu Help;
-    private javax.swing.JMenuItem Logout;
+    private javax.swing.JButton JobsRefreshButton;
+    private javax.swing.JScrollPane JobsScrollPane;
+    private javax.swing.JTable JobsTable;
+    private javax.swing.JMenuItem Members;
     private javax.swing.JMenuBar MenuBar;
-    private javax.swing.JMenuItem ViewMembers;
     // End of variables declaration//GEN-END:variables
 }

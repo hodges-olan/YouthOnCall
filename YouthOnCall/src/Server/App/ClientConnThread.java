@@ -72,9 +72,10 @@ public class ClientConnThread implements Runnable {
                     outputStream.println(returnData);
                     break;
                 case "authMember":
-                    data = inputStream.nextLine();
-                    returnData = this.authMember(data);
-                    outputStream.println(returnData);
+                    String email = inputStream.nextLine();
+                    String password = inputStream.nextLine();
+                    boolean authenticated = this.authMember(email, password);
+                    outputStream.println(authenticated);
                     break;
                 case "bye":
                     done = true;
@@ -135,8 +136,8 @@ public class ClientConnThread implements Runnable {
     }
 
     // Authenticate member method
-    private String authMember(String data) {
-        String returnData = membersControl.authMember(data);
+    private boolean authMember(String email, String password) {
+        boolean returnData = membersControl.authMember(email, password);
         return returnData;
     }
     
