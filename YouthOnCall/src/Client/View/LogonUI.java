@@ -142,7 +142,7 @@ public class LogonUI extends javax.swing.JFrame {
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // Declare Socket, Input, and Output Streams
         try (Socket socket = new Socket("127.0.0.1",7890)) {
-            boolean authenticated = false;
+            boolean authenticated;
             Scanner inputStream = new Scanner(socket.getInputStream());
             PrintStream outputStream = new PrintStream(socket.getOutputStream());
             outputStream.println("authMember");
@@ -172,7 +172,6 @@ public class LogonUI extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException
      */
     public static void main(String args[]) {
         
@@ -197,6 +196,7 @@ public class LogonUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new LogonUI().setVisible(true);
             }

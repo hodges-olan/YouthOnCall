@@ -6,7 +6,6 @@
 package Client.View;
 
 import Client.Control.JobsControl;
-import Client.Control.MembersControl;
 
 /**
  *
@@ -193,6 +192,7 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainMenuUI().setVisible(true);
             }
