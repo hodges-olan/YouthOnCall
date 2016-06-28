@@ -65,6 +65,7 @@ public class ClientConnThread implements Runnable {
                     this.authMember(data);
                     break;
                 case "bye":
+                    done = true;
                     this.inputStream.close();
                     this.outputStream.close();
                     try {
