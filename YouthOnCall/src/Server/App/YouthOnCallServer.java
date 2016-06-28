@@ -5,8 +5,6 @@
  */
 package Server.App;
 
-import Server.Control.JobsControl;
-import Server.Control.MembersControl;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,10 +25,6 @@ public class YouthOnCallServer {
     
     // Declare Session Factory
     private static final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-    
-    // Declare Controller Classes
-    private static final MembersControl membersControl = new MembersControl();
-    private static final JobsControl jobsControl = new JobsControl();
     
     /**
      * @param args the command line arguments

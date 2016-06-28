@@ -5,6 +5,12 @@
  */
 package Client.Model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author co075oh
@@ -19,6 +25,7 @@ public class Members {
     private int zip;
     private String phone;
     private boolean youth;
+    private String password;
 
     public Members() {
     }
@@ -93,6 +100,25 @@ public class Members {
 
     public void setYouth(boolean youth) {
         this.youth = youth;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(password.getBytes("UTF-8"));
+            byte[] byteData = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < byteData.length; i++) {
+                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            this.password = sb.toString();
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            Logger.getLogger(Members.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

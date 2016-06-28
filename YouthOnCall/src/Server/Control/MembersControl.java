@@ -68,7 +68,9 @@ public class MembersControl {
         return youth;
     }
     
-    public void authMember() {
+    public String authMember(String data) {
         SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
+        String returnData = "authMember method called!";
+        return returnData;
     }
 }

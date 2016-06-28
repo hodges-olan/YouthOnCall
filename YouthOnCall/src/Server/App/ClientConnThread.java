@@ -5,9 +5,14 @@
  */
 package Server.App;
 
+import com.google.gson.Gson;
+import Server.Control.JobsControl;
+import Server.Control.MembersControl;
+import Server.Model.Members;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +28,10 @@ public class ClientConnThread implements Runnable {
     Scanner inputStream;
     PrintStream outputStream;
     
+    // Declare Controller Classes
+    private final MembersControl membersControl = new MembersControl();
+    private final JobsControl jobsControl = new JobsControl();
+    
     // Default Constructor
     public ClientConnThread (Socket socket) throws IOException {
         this.socket = socket;
@@ -34,7 +43,8 @@ public class ClientConnThread implements Runnable {
     @Override
     public void run() {
         boolean done = false;
-        String command, data;
+        String command, data, returnData;
+        Integer intData;
         
         while (!done) {
             // Gather information from client
@@ -49,20 +59,22 @@ public class ClientConnThread implements Runnable {
                     this.updateMember(data);
                     break;
                 case "retrieveMember":
-                    data = inputStream.nextLine();
-                    this.retrieveMember(data);
+                    intData = inputStream.nextInt();
+                    returnData = this.retrieveMember(intData);
+                    outputStream.println(returnData);
                     break;
                 case "retrieveAllMembers":
-                    data = inputStream.nextLine();
-                    this.retrieveAllMembers(data);
+                    returnData = this.retrieveAllMembers();
+                    outputStream.println(returnData);
                     break;
                 case "retrieveAllYouth":
-                    data = inputStream.nextLine();
-                    this.retrieveAllYouth(data);
+                    returnData = this.retrieveAllYouth();
+                    outputStream.println(returnData);
                     break;
                 case "authMember":
                     data = inputStream.nextLine();
-                    this.authMember(data);
+                    returnData = this.authMember(data);
+                    outputStream.println(returnData);
                     break;
                 case "bye":
                     done = true;
@@ -73,38 +85,59 @@ public class ClientConnThread implements Runnable {
                     } catch (IOException ex) {
                         Logger.getLogger(ClientConnThread.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    break;
+                default:
+                    outputStream.println("Invalid Command");
+                    break;
             }
         }
     }
 
     // Create member method
     private void createMember(String data) {
-        this.outputStream.println("createMember called!");
+        Gson membersJSON = new Gson();
+        Members member = membersJSON.fromJson(data, Members.class);
+        outputStream.println(membersControl.createMember(member));
     }
 
     // Update member method
     private void updateMember(String data) {
-        this.outputStream.println("updateMember called!");
+        Gson membersJSON = new Gson();
+        Members member = membersJSON.fromJson(data, Members.class);
+        membersControl.updateMember(member);
     }
 
     // Retrieve member method
-    private void retrieveMember(String data) {
-        this.outputStream.println("retrieveMember called!");
+    private String retrieveMember(Integer data) {
+        Members member;
+        Gson membersJSON = new Gson();
+        member = membersControl.retrieveMember(data);
+        String returnData = membersJSON.toJson(member);
+        return returnData;
     }
 
     // Retrieve all members method
-    private void retrieveAllMembers(String data) {
-        this.outputStream.println("retrieveAllMembers called!");
+    private String retrieveAllMembers() {
+        List<Members> members;
+        Gson membersJSON = new Gson();
+        members = membersControl.retrieveAllMembers();
+        String returnData = membersJSON.toJson(members);
+        return returnData;
     }
 
     // Retrieve all youth method
-    private void retrieveAllYouth(String data) {
-        this.outputStream.println("retrieveAllYouth called!");
+    private String retrieveAllYouth() {
+        List<Members> youth;
+        Gson membersJSON = new Gson();
+        youth = membersControl.retrieveAllYouth();
+        String returnData = membersJSON.toJson(youth);
+        return returnData;
     }
 
     // Authenticate member method
-    private void authMember(String data) {
-        this.outputStream.println("authMember called!");
+    private String authMember(String data) {
+        String returnData = membersControl.authMember(data);
+        return returnData;
     }
     
 }
