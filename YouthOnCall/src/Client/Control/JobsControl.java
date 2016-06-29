@@ -25,7 +25,8 @@ public class JobsControl {
     
     public Object[][] retrieveAllJobs() {
         Object[][] jobs = {
-            {"22", "Mowing and Edging", "Mow and edge both the front and back yard.", "$20", "Olan Hodges", "None", "1 Hour", "Active"}
+            {"22", "Mowing and Edging", "Mow and edge both the front and back yard.", "$20", "Olan Hodges", "None", "1 Hour", "Active"},
+            {"23", "Carpet cleaning", "Clean carpet in all upstairs rooms", "$40", "Olan Hodges", "None", "2 Hour", "Active"}
         };
         return jobs;
     }
