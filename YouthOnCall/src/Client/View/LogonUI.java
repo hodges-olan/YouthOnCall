@@ -152,6 +152,7 @@ public class LogonUI extends javax.swing.JFrame {
             if (authenticated == true) {
                 outputStream.close();
                 inputStream.close();
+                socket.close();
                 this.dispose();
                 new MainMenuUI().setVisible(true);
             } else {
