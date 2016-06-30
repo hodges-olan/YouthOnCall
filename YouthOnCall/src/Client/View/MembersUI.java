@@ -55,8 +55,18 @@ public class MembersUI extends javax.swing.JFrame {
         MembersRefreshButton.setText("Refresh");
 
         AddMember.setText("Add Member");
+        AddMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddMemberActionPerformed(evt);
+            }
+        });
 
         EditMember.setText("Edit Member");
+        EditMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditMemberActionPerformed(evt);
+            }
+        });
 
         MembersMenu.setText("Members");
 
@@ -107,6 +117,14 @@ public class MembersUI extends javax.swing.JFrame {
     private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_CloseActionPerformed
+
+    private void AddMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddMemberActionPerformed
+        new AddMemberUI().setVisible(true);
+    }//GEN-LAST:event_AddMemberActionPerformed
+
+    private void EditMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditMemberActionPerformed
+        new EditMemberUI().setVisible(true);
+    }//GEN-LAST:event_EditMemberActionPerformed
 
     /**
      * @param args the command line arguments

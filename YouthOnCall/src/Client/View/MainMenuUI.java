@@ -64,8 +64,18 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
 
         AddJob.setText("Add Job");
+        AddJob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddJobActionPerformed(evt);
+            }
+        });
 
         EditJob.setText("Edit Job");
+        EditJob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditJobActionPerformed(evt);
+            }
+        });
 
         File.setText("File");
 
@@ -162,6 +172,14 @@ public class MainMenuUI extends javax.swing.JFrame {
             columns
         ));
     }//GEN-LAST:event_JobsRefreshButtonActionPerformed
+
+    private void AddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddJobActionPerformed
+        new AddJobUI().setVisible(true);
+    }//GEN-LAST:event_AddJobActionPerformed
+
+    private void EditJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditJobActionPerformed
+        new EditJobUI().setVisible(true);
+    }//GEN-LAST:event_EditJobActionPerformed
 
     /**
      * @param args the command line arguments
