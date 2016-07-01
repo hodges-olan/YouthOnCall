@@ -89,7 +89,7 @@ public class Jobs implements Serializable {
         return pay;
     }
 
-    public void setPay(float pay) {
+    public void setPay(double pay) {
         this.pay = pay;
     }
 

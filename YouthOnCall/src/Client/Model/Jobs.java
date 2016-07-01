@@ -13,7 +13,7 @@ public class Jobs {
     private int id;
     private String name;
     private String description;
-    private float pay;
+    private double pay;
     private int memberID;
     private int youthID;
     private int estHours;
@@ -46,11 +46,11 @@ public class Jobs {
         this.description = description;
     }
 
-    public float getPay() {
+    public double getPay() {
         return pay;
     }
 
-    public void setPay(float pay) {
+    public void setPay(double pay) {
         this.pay = pay;
     }
 
