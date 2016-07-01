@@ -51,7 +51,8 @@ public class MembersUI extends javax.swing.JFrame {
                 membersController.retrieveAllMembers(),
                 membersController.retrieveColumns()
             )
-            {public boolean isCellEditable(int row, int column){return false;}}
+            {@Override
+                public boolean isCellEditable(int row, int column){return false;}}
         );
     } catch (IOException ex) {
         Logger.getLogger(MembersUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -142,7 +143,8 @@ public class MembersUI extends javax.swing.JFrame {
             MembersTable.setModel(new javax.swing.table.DefaultTableModel(
                     membersController.retrieveAllMembers(),
                     membersController.retrieveColumns()
-            ){public boolean isCellEditable(int row, int column){return false;}});
+            ){@Override
+            public boolean isCellEditable(int row, int column){return false;}});
         } catch (IOException ex) {
             Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
         }

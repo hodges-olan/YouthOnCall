@@ -5,7 +5,15 @@
  */
 package Client.Control;
 
+import Client.App.YouthOnCallClient;
+import Client.Model.Jobs;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -29,10 +37,33 @@ public class JobsControl {
     }
     
     public Object[][] retrieveAllJobs() throws IOException {
-        Object[][] jobs = {
-            {"22", "Mowing and Edging", "Mow and edge both the front and back yard.", "$20", "Olan Hodges", "None", "1 Hour", "Active"},
-            {"23", "Carpet cleaning", "Clean carpet in all upstairs rooms", "$40", "Olan Hodges", "None", "2 Hour", "Active"}
-        };
+        List<Jobs> allJobs;
+        String allJobsJSON;
+        Gson allJobsGSON = new Gson();
+        try (Socket socket = new Socket(YouthOnCallClient.SERVER,YouthOnCallClient.PORT)) {
+            Scanner inputStream = new Scanner(socket.getInputStream());
+            PrintStream outputStream = new PrintStream(socket.getOutputStream());
+            outputStream.println("retrieveAllJobs");
+            allJobsJSON = inputStream.nextLine();
+            allJobs = allJobsGSON.fromJson(allJobsJSON, new TypeToken<List<Jobs>>(){}.getType());
+        }
+        
+        int i = 0;
+        Object[][] jobs = new Object[allJobs.size()][];
+        for (Jobs job : allJobs) {
+            Object[] individualJob = {
+                job.getId(),
+                job.getName(),
+                job.getDescription(),
+                job.getPay(),
+                job.getMemberID(),
+                job.getYouthID(),
+                job.getEstHours(),
+                job.getStatus()
+            };
+            jobs[i] = individualJob;
+            i++;
+        }
         return jobs;
     }
     

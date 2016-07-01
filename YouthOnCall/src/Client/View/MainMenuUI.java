@@ -55,7 +55,8 @@ public class MainMenuUI extends javax.swing.JFrame {
                 jobsController.retrieveAllJobs(),
                 jobsController.retrieveColumns()
             )
-            {public boolean isCellEditable(int row, int column){return false;}}
+            {@Override
+                public boolean isCellEditable(int row, int column){return false;}}
         );
     } catch (IOException ex) {
         Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -177,7 +178,8 @@ public class MainMenuUI extends javax.swing.JFrame {
             JobsTable.setModel(new javax.swing.table.DefaultTableModel(
                     jobsController.retrieveAllJobs(),
                     jobsController.retrieveColumns()
-            ){public boolean isCellEditable(int row, int column){return false;}});
+            ){@Override
+            public boolean isCellEditable(int row, int column){return false;}});
         } catch (IOException ex) {
             Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
         }
