@@ -32,8 +32,6 @@ public class Jobs implements Serializable {
     private int youthID;
     @Column (name="estHours")
     private int estHours;
-    @Column (name="estMinutes")
-    private int estMinutes;
     @Column (name="status")
     private String status;
 
@@ -41,18 +39,17 @@ public class Jobs implements Serializable {
     public Jobs() {
     }
 
-    public Jobs(int id, String name, String description, float pay, int memberID, int estHours, int estMinutes, String status) {
+    public Jobs(int id, String name, String description, float pay, int memberID, int estHours, String status) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.pay = pay;
         this.memberID = memberID;
         this.estHours = estHours;
-        this.estMinutes = estMinutes;
         this.status = status;
     }
     
-    public Jobs(int id, String name, String description, float pay, int memberID, int youthID, int estHours, int estMinutes, String status) {
+    public Jobs(int id, String name, String description, float pay, int memberID, int youthID, int estHours, String status) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -60,7 +57,6 @@ public class Jobs implements Serializable {
         this.memberID = memberID;
         this.youthID = youthID;
         this.estHours = estHours;
-        this.estMinutes = estMinutes;
         this.status = status;
     }
     
@@ -119,14 +115,6 @@ public class Jobs implements Serializable {
 
     public void setEstHours(int estHours) {
         this.estHours = estHours;
-    }
-
-    public int getEstMinutes() {
-        return estMinutes;
-    }
-
-    public void setEstMinutes(int estMinutes) {
-        this.estMinutes = estMinutes;
     }
 
     public String getStatus() {

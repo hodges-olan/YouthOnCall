@@ -11,7 +11,6 @@
         <property name="memberID" column="memberID" type="int"/>
         <property name="youthID" column="youthID" type="int"/>
         <property name="estHours" column="estHours" type="int"/>
-        <property name="estMinutes" column="estMinutes" type="int"/>
         <property name="status" column="status" type="string"/>
     </class>
     <class name="Server.Model.Members" table="members">

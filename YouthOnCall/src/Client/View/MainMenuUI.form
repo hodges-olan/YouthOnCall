@@ -121,9 +121,13 @@
         <Component class="javax.swing.JTable" name="JobsTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    jobsController.retrieveAllJobs(),&#xa;    columns&#xa;)" type="code"/>
+              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;            jobsController.retrieveAllJobs(),&#xa;            jobsController.retrieveColumns()&#xa;)" type="code"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} catch (IOException ex) {&#xa;    Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

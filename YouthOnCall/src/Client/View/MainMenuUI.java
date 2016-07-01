@@ -6,6 +6,9 @@
 package Client.View;
 
 import Client.Control.JobsControl;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,9 +18,6 @@ public class MainMenuUI extends javax.swing.JFrame {
     
     // Define Controllers
     private final JobsControl jobsController = new JobsControl();
-    
-    // Define Table Columns
-    String[] columns = {"ID", "Job", "Description", "Pay", "Member", "Youth", "Est. Time", "Status"};
     
     /**
      * Creates new form MainMenuUI
@@ -50,10 +50,14 @@ public class MainMenuUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Youth OnCall");
 
-        JobsTable.setModel(new javax.swing.table.DefaultTableModel(
-            jobsController.retrieveAllJobs(),
-            columns
-        ));
+        try {
+            JobsTable.setModel(new javax.swing.table.DefaultTableModel(
+                jobsController.retrieveAllJobs(),
+                jobsController.retrieveColumns()
+            ));
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         JobsScrollPane.setViewportView(JobsTable);
 
         JobsRefreshButton.setText("Refresh");
@@ -167,10 +171,14 @@ public class MainMenuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_MembersActionPerformed
 
     private void JobsRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JobsRefreshButtonActionPerformed
-        JobsTable.setModel(new javax.swing.table.DefaultTableModel(
-            jobsController.retrieveAllJobs(),
-            columns
-        ));
+        try {
+            JobsTable.setModel(new javax.swing.table.DefaultTableModel(
+                    jobsController.retrieveAllJobs(),
+                    jobsController.retrieveColumns()
+            ));
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_JobsRefreshButtonActionPerformed
 
     private void AddJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddJobActionPerformed
@@ -197,15 +205,11 @@ public class MainMenuUI extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainMenuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */

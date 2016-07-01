@@ -5,6 +5,7 @@
  */
 package Server.Control;
 
+import Server.App.YouthOnCallServer;
 import Server.Model.Jobs;
 import java.util.List;
 import org.hibernate.Session;
@@ -16,8 +17,9 @@ import org.hibernate.SessionFactory;
  */
 public class JobsControl {
     
-    public Integer createJob(SessionFactory sessionFactory, Jobs job) {
+    public Integer createJob(Jobs job) {
         Integer jobID;
+        SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             jobID = (Integer) session.save(job);
@@ -26,7 +28,8 @@ public class JobsControl {
         return jobID;
     }
     
-    public void updateJob(SessionFactory sessionFactory, Jobs job) {
+    public void updateJob(Jobs job) {
+        SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.update(job);
@@ -34,8 +37,9 @@ public class JobsControl {
         }
     }
     
-    public Jobs retrieveJob(SessionFactory sessionFactory, Integer search) {
+    public Jobs retrieveJob(Integer search) {
         Jobs job;
+        SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             job = session.get(Jobs.class, search);
@@ -43,8 +47,9 @@ public class JobsControl {
         return job;
     }
     
-    public List<Jobs> retrieveAllJobs(SessionFactory sessionFactory) {
+    public List<Jobs> retrieveAllJobs() {
         List<Jobs> jobs;
+        SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             jobs = session.createCriteria(Jobs.class).list();

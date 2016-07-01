@@ -27,12 +27,12 @@ public class EditMemberUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        EditMemberButton = new javax.swing.JButton();
+        SaveButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        EditMemberButton.setText("Edit Member");
+        SaveButton.setText("Save");
 
         CancelButton.setText("Cancel");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -47,17 +47,17 @@ public class EditMemberUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(EditMemberButton)
+                .addComponent(SaveButton)
                 .addGap(18, 18, 18)
                 .addComponent(CancelButton)
-                .addContainerGap(355, Short.MAX_VALUE))
+                .addContainerGap(389, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(377, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EditMemberButton)
+                    .addComponent(SaveButton)
                     .addComponent(CancelButton))
                 .addContainerGap())
         );
@@ -107,6 +107,6 @@ public class EditMemberUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
-    private javax.swing.JButton EditMemberButton;
+    private javax.swing.JButton SaveButton;
     // End of variables declaration//GEN-END:variables
 }

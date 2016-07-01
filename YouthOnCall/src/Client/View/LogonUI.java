@@ -5,6 +5,7 @@
  */
 package Client.View;
 
+import Client.App.YouthOnCallClient;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -141,7 +142,7 @@ public class LogonUI extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // Declare Socket, Input, and Output Streams
-        try (Socket socket = new Socket("127.0.0.1",7890)) {
+        try (Socket socket = new Socket(YouthOnCallClient.SERVER,YouthOnCallClient.PORT)) {
             boolean authenticated;
             Scanner inputStream = new Scanner(socket.getInputStream());
             PrintStream outputStream = new PrintStream(socket.getOutputStream());

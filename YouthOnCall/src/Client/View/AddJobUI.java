@@ -27,12 +27,12 @@ public class AddJobUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        AddJobButton = new javax.swing.JButton();
+        SaveButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        AddJobButton.setText("Add Job");
+        SaveButton.setText("Save");
 
         CancelButton.setText("Cancel");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -47,17 +47,17 @@ public class AddJobUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(AddJobButton)
+                .addComponent(SaveButton)
                 .addGap(18, 18, 18)
                 .addComponent(CancelButton)
-                .addContainerGap(364, Short.MAX_VALUE))
+                .addContainerGap(378, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(371, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddJobButton)
+                    .addComponent(SaveButton)
                     .addComponent(CancelButton))
                 .addContainerGap())
         );
@@ -105,7 +105,7 @@ public class AddJobUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddJobButton;
     private javax.swing.JButton CancelButton;
+    private javax.swing.JButton SaveButton;
     // End of variables declaration//GEN-END:variables
 }

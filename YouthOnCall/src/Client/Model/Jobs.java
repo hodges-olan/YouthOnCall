@@ -17,7 +17,6 @@ public class Jobs {
     private int memberID;
     private int youthID;
     private int estHours;
-    private int estMinutes;
     private String status;
 
     public Jobs() {
@@ -79,14 +78,6 @@ public class Jobs {
         this.estHours = estHours;
     }
 
-    public int getEstMinutes() {
-        return estMinutes;
-    }
-
-    public void setEstMinutes(int estMinutes) {
-        this.estMinutes = estMinutes;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -94,4 +85,5 @@ public class Jobs {
     public void setStatus(String status) {
         this.status = status;
     }
+    
 }

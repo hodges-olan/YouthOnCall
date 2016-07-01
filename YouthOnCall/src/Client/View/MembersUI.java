@@ -6,6 +6,9 @@
 package Client.View;
 
 import Client.Control.MembersControl;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,9 +18,6 @@ public class MembersUI extends javax.swing.JFrame {
 
     // Define Controllers
     private final MembersControl membersController = new MembersControl();
-    
-    // Define Table Columns
-    String[] columns = {"ID", "Name", "Email", "Address", "City", "State", "Zip", "Phone", "Youth/Member"};
     
     /**
      * Creates new form MemberUI
@@ -46,13 +46,22 @@ public class MembersUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        MembersTable.setModel(new javax.swing.table.DefaultTableModel(
-            membersController.retrieveAllMembers(),
-            columns
-        ));
+        try {
+            MembersTable.setModel(new javax.swing.table.DefaultTableModel(
+                membersController.retrieveAllMembers(),
+                membersController.retrieveColumns()
+            ));
+        } catch (IOException ex) {
+            Logger.getLogger(MembersUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         MembersScrollPane.setViewportView(MembersTable);
 
         MembersRefreshButton.setText("Refresh");
+        MembersRefreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MembersRefreshButtonActionPerformed(evt);
+            }
+        });
 
         AddMember.setText("Add Member");
         AddMember.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +134,17 @@ public class MembersUI extends javax.swing.JFrame {
     private void EditMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditMemberActionPerformed
         new EditMemberUI().setVisible(true);
     }//GEN-LAST:event_EditMemberActionPerformed
+
+    private void MembersRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MembersRefreshButtonActionPerformed
+        try {
+            MembersTable.setModel(new javax.swing.table.DefaultTableModel(
+                    membersController.retrieveAllMembers(),
+                    membersController.retrieveColumns()
+            ));
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_MembersRefreshButtonActionPerformed
 
     /**
      * @param args the command line arguments

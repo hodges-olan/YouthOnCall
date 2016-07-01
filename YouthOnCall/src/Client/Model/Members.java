@@ -21,7 +21,7 @@ public class Members {
     private String email;
     private String address;
     private String city;
-    private String state;
+    private String st;
     private int zip;
     private String phone;
     private boolean youth;
@@ -70,12 +70,12 @@ public class Members {
         this.city = city;
     }
 
-    public String getState() {
-        return state;
+    public String getSt() {
+        return st;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setSt(String st) {
+        this.st = st;
     }
 
     public int getZip() {
