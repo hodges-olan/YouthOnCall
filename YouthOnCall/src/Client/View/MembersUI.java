@@ -50,77 +50,79 @@ public class MembersUI extends javax.swing.JFrame {
             MembersTable.setModel(new javax.swing.table.DefaultTableModel(
                 membersController.retrieveAllMembers(),
                 membersController.retrieveColumns()
-            ));
-        } catch (IOException ex) {
-            Logger.getLogger(MembersUI.class.getName()).log(Level.SEVERE, null, ex);
+            )
+            {public boolean isCellEditable(int row, int column){return false;}}
+        );
+    } catch (IOException ex) {
+        Logger.getLogger(MembersUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    MembersScrollPane.setViewportView(MembersTable);
+
+    MembersRefreshButton.setText("Refresh");
+    MembersRefreshButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            MembersRefreshButtonActionPerformed(evt);
         }
-        MembersScrollPane.setViewportView(MembersTable);
+    });
 
-        MembersRefreshButton.setText("Refresh");
-        MembersRefreshButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MembersRefreshButtonActionPerformed(evt);
-            }
-        });
+    AddMember.setText("Add Member");
+    AddMember.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            AddMemberActionPerformed(evt);
+        }
+    });
 
-        AddMember.setText("Add Member");
-        AddMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddMemberActionPerformed(evt);
-            }
-        });
+    EditMember.setText("Edit Member");
+    EditMember.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            EditMemberActionPerformed(evt);
+        }
+    });
 
-        EditMember.setText("Edit Member");
-        EditMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditMemberActionPerformed(evt);
-            }
-        });
+    MembersMenu.setText("Members");
 
-        MembersMenu.setText("Members");
+    Close.setText("Close");
+    Close.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            CloseActionPerformed(evt);
+        }
+    });
+    MembersMenu.add(Close);
 
-        Close.setText("Close");
-        Close.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CloseActionPerformed(evt);
-            }
-        });
-        MembersMenu.add(Close);
+    MenuBar.add(MembersMenu);
 
-        MenuBar.add(MembersMenu);
+    setJMenuBar(MenuBar);
 
-        setJMenuBar(MenuBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(MembersScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(AddMember)
-                        .addGap(18, 18, 18)
-                        .addComponent(EditMember)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(MembersRefreshButton)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(MembersScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MembersRefreshButton)
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(MembersScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addComponent(AddMember)
-                    .addComponent(EditMember))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+                    .addGap(18, 18, 18)
+                    .addComponent(EditMember)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MembersRefreshButton)))
+            .addContainerGap())
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(MembersScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(MembersRefreshButton)
+                .addComponent(AddMember)
+                .addComponent(EditMember))
+            .addContainerGap(15, Short.MAX_VALUE))
+    );
 
-        pack();
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
@@ -140,7 +142,7 @@ public class MembersUI extends javax.swing.JFrame {
             MembersTable.setModel(new javax.swing.table.DefaultTableModel(
                     membersController.retrieveAllMembers(),
                     membersController.retrieveColumns()
-            ));
+            ){public boolean isCellEditable(int row, int column){return false;}});
         } catch (IOException ex) {
             Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
         }

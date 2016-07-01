@@ -8,6 +8,7 @@ package Server.App;
 import com.google.gson.Gson;
 import Server.Control.JobsControl;
 import Server.Control.MembersControl;
+import Server.Model.Jobs;
 import Server.Model.Members;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -77,6 +78,23 @@ public class ClientConnThread implements Runnable {
                     boolean authenticated = this.authMember(email, password);
                     outputStream.println(authenticated);
                     break;
+                case "createJob":
+                    data = inputStream.nextLine();
+                    this.createJob(data);
+                    break;
+                case "updateJob":
+                    data = inputStream.nextLine();
+                    this.updateJob(data);
+                    break;
+                case "retrieveJob":
+                    intData = inputStream.nextInt();
+                    returnData = this.retrieveJob(intData);
+                    outputStream.println(returnData);
+                    break;
+                case "retrieveAllJobs":
+                    returnData = this.retrieveAllJobs();
+                    outputStream.println(returnData);
+                    break;
                 case "bye":
                     done = true;
                     this.inputStream.close();
@@ -138,6 +156,34 @@ public class ClientConnThread implements Runnable {
     // Authenticate member method
     private boolean authMember(String email, String password) {
         boolean returnData = membersControl.authMember(email, password);
+        return returnData;
+    }
+
+    private void createJob(String data) {
+        Gson jobsJSON = new Gson();
+        Jobs job = jobsJSON.fromJson(data, Jobs.class);
+        outputStream.println(jobsControl.createJob(job));
+    }
+
+    private void updateJob(String data) {
+        Gson jobsJSON = new Gson();
+        Jobs job = jobsJSON.fromJson(data, Jobs.class);
+        jobsControl.updateJob(job);
+    }
+
+    private String retrieveJob(Integer data) {
+        Jobs job;
+        Gson jobsJSON = new Gson();
+        job = jobsControl.retrieveJob(data);
+        String returnData = jobsJSON.toJson(job);
+        return returnData;
+    }
+
+    private String retrieveAllJobs() {
+        List<Jobs> jobs;
+        Gson jobsJSON = new Gson();
+        jobs = jobsControl.retrieveAllJobs();
+        String returnData = jobsJSON.toJson(jobs);
         return returnData;
     }
     

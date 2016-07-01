@@ -54,104 +54,106 @@ public class MainMenuUI extends javax.swing.JFrame {
             JobsTable.setModel(new javax.swing.table.DefaultTableModel(
                 jobsController.retrieveAllJobs(),
                 jobsController.retrieveColumns()
-            ));
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
+            )
+            {public boolean isCellEditable(int row, int column){return false;}}
+        );
+    } catch (IOException ex) {
+        Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    JobsScrollPane.setViewportView(JobsTable);
+
+    JobsRefreshButton.setText("Refresh");
+    JobsRefreshButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            JobsRefreshButtonActionPerformed(evt);
         }
-        JobsScrollPane.setViewportView(JobsTable);
+    });
 
-        JobsRefreshButton.setText("Refresh");
-        JobsRefreshButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JobsRefreshButtonActionPerformed(evt);
-            }
-        });
+    AddJob.setText("Add Job");
+    AddJob.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            AddJobActionPerformed(evt);
+        }
+    });
 
-        AddJob.setText("Add Job");
-        AddJob.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddJobActionPerformed(evt);
-            }
-        });
+    EditJob.setText("Edit Job");
+    EditJob.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            EditJobActionPerformed(evt);
+        }
+    });
 
-        EditJob.setText("Edit Job");
-        EditJob.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditJobActionPerformed(evt);
-            }
-        });
+    File.setText("File");
 
-        File.setText("File");
+    Members.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
+    Members.setText("Members");
+    Members.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            MembersActionPerformed(evt);
+        }
+    });
+    File.add(Members);
 
-        Members.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
-        Members.setText("Members");
-        Members.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MembersActionPerformed(evt);
-            }
-        });
-        File.add(Members);
+    Exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+    Exit.setText("Exit");
+    Exit.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            ExitActionPerformed(evt);
+        }
+    });
+    File.add(Exit);
 
-        Exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        Exit.setText("Exit");
-        Exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
-            }
-        });
-        File.add(Exit);
+    MenuBar.add(File);
 
-        MenuBar.add(File);
+    Help.setText("Help");
+    Help.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            HelpActionPerformed(evt);
+        }
+    });
 
-        Help.setText("Help");
-        Help.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HelpActionPerformed(evt);
-            }
-        });
+    About.setText("About");
+    About.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            AboutActionPerformed(evt);
+        }
+    });
+    Help.add(About);
 
-        About.setText("About");
-        About.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AboutActionPerformed(evt);
-            }
-        });
-        Help.add(About);
+    MenuBar.add(Help);
 
-        MenuBar.add(Help);
+    setJMenuBar(MenuBar);
 
-        setJMenuBar(MenuBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JobsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(AddJob)
-                        .addGap(18, 18, 18)
-                        .addComponent(EditJob)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JobsRefreshButton)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JobsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JobsRefreshButton)
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(JobsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addComponent(AddJob)
-                    .addComponent(EditJob))
-                .addContainerGap())
-        );
+                    .addGap(18, 18, 18)
+                    .addComponent(EditJob)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JobsRefreshButton)))
+            .addContainerGap())
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(JobsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(JobsRefreshButton)
+                .addComponent(AddJob)
+                .addComponent(EditJob))
+            .addContainerGap())
+    );
 
-        pack();
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
@@ -175,7 +177,7 @@ public class MainMenuUI extends javax.swing.JFrame {
             JobsTable.setModel(new javax.swing.table.DefaultTableModel(
                     jobsController.retrieveAllJobs(),
                     jobsController.retrieveColumns()
-            ));
+            ){public boolean isCellEditable(int row, int column){return false;}});
         } catch (IOException ex) {
             Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
         }
