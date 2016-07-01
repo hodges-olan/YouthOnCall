@@ -10,7 +10,7 @@ package Client.View;
  * @author olanandkate
  */
 public class EditJobUI extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form EditJobUI
      */
@@ -97,10 +97,8 @@ public class EditJobUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditJobUI().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new EditJobUI().setVisible(true);
         });
     }
 

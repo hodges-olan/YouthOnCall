@@ -197,11 +197,8 @@ public class LogonUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LogonUI().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new LogonUI().setVisible(true);
         });
     }
 

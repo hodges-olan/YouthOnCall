@@ -24,8 +24,24 @@ public class MembersControl {
     // Define attributes
     String[] columns = {"ID", "Name", "Email", "Address", "City", "State", "Zip", "Phone", "Youth/Member"};
     
-    public void createMember() {
+    public void createMember(String name, String email, String address, String city, String st, int zip, String phone, boolean youth) throws IOException {
+        Members member = new Members();
+        member.setName(name);
+        member.setEmail(email);
+        member.setAddress(address);
+        member.setCity(city);
+        member.setSt(st);
+        member.setZip(zip);
+        member.setPhone(phone);
+        member.setYouth(youth);
         
+        Gson membersGSON = new Gson();
+        try (Socket socket = new Socket(YouthOnCallClient.SERVER,YouthOnCallClient.PORT)) {
+            Scanner inputStream = new Scanner(socket.getInputStream());
+            PrintStream outputStream = new PrintStream(socket.getOutputStream());
+            outputStream.println("createMember");
+            outputStream.println(membersGSON.toJson(member));
+        }
     }
     
     public void updateMember() {

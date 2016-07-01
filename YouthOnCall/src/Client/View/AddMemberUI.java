@@ -5,12 +5,20 @@
  */
 package Client.View;
 
+import Client.Control.MembersControl;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author olanandkate
  */
 public class AddMemberUI extends javax.swing.JFrame {
 
+    // Define Controllers
+    private final MembersControl membersController = new MembersControl();
+    
     /**
      * Creates new form AddJobUI
      */
@@ -29,10 +37,35 @@ public class AddMemberUI extends javax.swing.JFrame {
 
         SaverButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
+        NameLabel = new javax.swing.JLabel();
+        EmailLabel = new javax.swing.JLabel();
+        AddressLabel = new javax.swing.JLabel();
+        CityLabel = new javax.swing.JLabel();
+        StateLabel = new javax.swing.JLabel();
+        ZipLabel = new javax.swing.JLabel();
+        PhoneLabel = new javax.swing.JLabel();
+        YouthLabel = new javax.swing.JLabel();
+        PasswordLabel = new javax.swing.JLabel();
+        ConfirmPasswordLabel = new javax.swing.JLabel();
+        MemberField = new javax.swing.JComboBox<>();
+        PasswordField = new javax.swing.JPasswordField();
+        ConfirmPasswordField = new javax.swing.JPasswordField();
+        PhoneField = new javax.swing.JTextField();
+        ZipField = new javax.swing.JTextField();
+        StateField = new javax.swing.JTextField();
+        CityField = new javax.swing.JTextField();
+        AddressField = new javax.swing.JTextField();
+        EmailField = new javax.swing.JTextField();
+        NameField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         SaverButton.setText("Save");
+        SaverButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaverButtonActionPerformed(evt);
+            }
+        });
 
         CancelButton.setText("Cancel");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -41,21 +74,109 @@ public class AddMemberUI extends javax.swing.JFrame {
             }
         });
 
+        NameLabel.setText("Name:");
+
+        EmailLabel.setText("Email:");
+
+        AddressLabel.setText("Address:");
+
+        CityLabel.setText("City:");
+
+        StateLabel.setText("State:");
+
+        ZipLabel.setText("Zip:");
+
+        PhoneLabel.setText("Phone:");
+
+        YouthLabel.setText("Membership");
+
+        PasswordLabel.setText("Password:");
+
+        ConfirmPasswordLabel.setText("Confirm Password:");
+
+        MemberField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Member", "Youth" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(SaverButton)
-                .addGap(18, 18, 18)
-                .addComponent(CancelButton)
-                .addContainerGap(378, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SaverButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(CancelButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(YouthLabel)
+                            .addComponent(PasswordLabel)
+                            .addComponent(ConfirmPasswordLabel)
+                            .addComponent(PhoneLabel)
+                            .addComponent(ZipLabel)
+                            .addComponent(StateLabel)
+                            .addComponent(CityLabel)
+                            .addComponent(AddressLabel)
+                            .addComponent(EmailLabel)
+                            .addComponent(NameLabel))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(MemberField, 0, 354, Short.MAX_VALUE)
+                            .addComponent(PasswordField)
+                            .addComponent(ConfirmPasswordField)
+                            .addComponent(PhoneField)
+                            .addComponent(ZipField)
+                            .addComponent(StateField)
+                            .addComponent(CityField)
+                            .addComponent(AddressField)
+                            .addComponent(EmailField)
+                            .addComponent(NameField))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(371, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NameLabel)
+                    .addComponent(NameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EmailLabel)
+                    .addComponent(EmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddressLabel)
+                    .addComponent(AddressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CityLabel)
+                    .addComponent(CityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StateLabel)
+                    .addComponent(StateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ZipLabel)
+                    .addComponent(ZipField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PhoneLabel)
+                    .addComponent(PhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(YouthLabel)
+                    .addComponent(MemberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PasswordLabel)
+                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConfirmPasswordLabel)
+                    .addComponent(ConfirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaverButton)
                     .addComponent(CancelButton))
@@ -68,6 +189,27 @@ public class AddMemberUI extends javax.swing.JFrame {
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_CancelButtonActionPerformed
+
+    private void SaverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaverButtonActionPerformed
+        String name = NameField.getText();
+        String email = EmailField.getText();
+        String address = AddressField.getText();
+        String city = CityField.getText();
+        String st = StateField.getText();
+        int zip = Integer.parseInt(ZipField.getText());
+        String phone = PhoneField.getText();
+        boolean youth = true;
+        if (MemberField.getSelectedItem() == "Member") {
+            youth = false;
+        }
+        
+        try {
+            membersController.createMember(name, email, address, city, st, zip, phone, youth);
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(AddMemberUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_SaverButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -98,15 +240,33 @@ public class AddMemberUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddMemberUI().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new AddMemberUI().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AddressField;
+    private javax.swing.JLabel AddressLabel;
     private javax.swing.JButton CancelButton;
+    private javax.swing.JTextField CityField;
+    private javax.swing.JLabel CityLabel;
+    private javax.swing.JPasswordField ConfirmPasswordField;
+    private javax.swing.JLabel ConfirmPasswordLabel;
+    private javax.swing.JTextField EmailField;
+    private javax.swing.JLabel EmailLabel;
+    private javax.swing.JComboBox<String> MemberField;
+    private javax.swing.JTextField NameField;
+    private javax.swing.JLabel NameLabel;
+    private javax.swing.JPasswordField PasswordField;
+    private javax.swing.JLabel PasswordLabel;
+    private javax.swing.JTextField PhoneField;
+    private javax.swing.JLabel PhoneLabel;
     private javax.swing.JButton SaverButton;
+    private javax.swing.JTextField StateField;
+    private javax.swing.JLabel StateLabel;
+    private javax.swing.JLabel YouthLabel;
+    private javax.swing.JTextField ZipField;
+    private javax.swing.JLabel ZipLabel;
     // End of variables declaration//GEN-END:variables
 }
