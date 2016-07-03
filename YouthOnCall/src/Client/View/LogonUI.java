@@ -6,6 +6,8 @@
 package Client.View;
 
 import Client.App.YouthOnCallClient;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -25,6 +27,8 @@ public class LogonUI extends javax.swing.JFrame {
     public LogonUI() {
         initComponents();
         AuthFailedLabel.setVisible(false);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**
