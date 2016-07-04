@@ -6,13 +6,12 @@
 package Server.Control;
 
 import Server.App.YouthOnCallServer;
+import Server.App.yocLogger;
 import Server.Model.Members;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -25,11 +24,13 @@ public class MembersControl {
 
     public Integer createMember(Members member) {
         SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
-        Integer memberID;
+        Integer memberID = null;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             memberID = (Integer) session.save(member);
             session.getTransaction().commit();
+        } catch (Exception ex) {
+            yocLogger.log("createMember", ex.getMessage(), "ERR");
         }
         return memberID;
     }
@@ -40,35 +41,43 @@ public class MembersControl {
             session.beginTransaction();
             session.update(member);
             session.getTransaction().commit();
+        } catch (Exception ex) {
+            yocLogger.log("updateMember", ex.getMessage(), "ERR");
         }
     }
     
     public Members retrieveMember(Integer search) {
-        Members member;
+        Members member = null;
         SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             member = session.get(Members.class, search);
+        } catch (Exception ex) {
+            yocLogger.log("retrieveMember", ex.getMessage(), "ERR");
         }
         return member;
     }
     
     public List<Members> retrieveAllMembers() {
-        List<Members> members;
+        List<Members> members = null;
         SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             members = session.createCriteria(Members.class).add( Restrictions.eq("youth", false) ).list();
+        } catch (Exception ex) {
+            yocLogger.log("retrieveAllMembers", ex.getMessage(), "ERR");
         }
         return members;
     }
     
     public List<Members> retrieveAllYouth() {
-        List<Members> youth;
+        List<Members> youth = null;
         SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             youth = session.createCriteria(Members.class).add( Restrictions.eq("youth", true) ).list();
+        } catch (Exception ex) {
+            yocLogger.log("retrieveAllYouth", ex.getMessage(), "ERR");
         }
         return youth;
     }
@@ -82,6 +91,8 @@ public class MembersControl {
             if (session.createCriteria(Members.class).add( Restrictions.eq("email", email) ).add( Restrictions.eq("password", hashedPassword) ).list().size() == 1) {
                 authenticated = true;
             }
+        } catch (Exception ex) {
+            yocLogger.log("authMember", ex.getMessage(), "ERR");
         }
         return authenticated;
     }
@@ -98,7 +109,7 @@ public class MembersControl {
             }
             hashedPassword = sb.toString();
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            Logger.getLogger(Client.Model.Members.class.getName()).log(Level.SEVERE, null, ex);
+            yocLogger.log("hashPassword", ex.getMessage(), "ERR");
         }
         return hashedPassword;
     }

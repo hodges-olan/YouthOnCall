@@ -12,6 +12,7 @@ import Server.Model.Jobs;
 import Server.Model.Members;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 import java.util.Scanner;
@@ -54,55 +55,66 @@ public class ClientConnThread implements Runnable {
                 case "createMember":
                     data = inputStream.nextLine();
                     this.createMember(data);
+                    yocLogger.log(command, data, "INFO");
                     break;
                 case "updateMember":
                     data = inputStream.nextLine();
                     this.updateMember(data);
+                    yocLogger.log(command, data, "INFO");
                     break;
                 case "retrieveMember":
                     intData = inputStream.nextInt();
                     returnData = this.retrieveMember(intData);
                     outputStream.println(returnData);
+                    yocLogger.log(command, Integer.toString(intData), "INFO");
                     break;
                 case "retrieveAllMembers":
                     returnData = this.retrieveAllMembers();
                     outputStream.println(returnData);
+                    yocLogger.log(command, returnData, "INFO");
                     break;
                 case "retrieveAllYouth":
                     returnData = this.retrieveAllYouth();
                     outputStream.println(returnData);
+                    yocLogger.log(command, returnData, "INFO");
                     break;
                 case "authMember":
                     String email = inputStream.nextLine();
                     String password = inputStream.nextLine();
                     boolean authenticated = this.authMember(email, password);
                     outputStream.println(authenticated);
+                    yocLogger.log(command, email, "INFO");
                     break;
                 case "createJob":
                     data = inputStream.nextLine();
                     this.createJob(data);
+                    yocLogger.log(command, data, "INFO");
                     break;
                 case "updateJob":
                     data = inputStream.nextLine();
                     this.updateJob(data);
+                    yocLogger.log(command, data, "INFO");
                     break;
                 case "retrieveJob":
                     intData = inputStream.nextInt();
                     returnData = this.retrieveJob(intData);
+                    yocLogger.log(command, Integer.toString(intData), "INFO");
                     outputStream.println(returnData);
                     break;
                 case "retrieveAllJobs":
                     returnData = this.retrieveAllJobs();
                     outputStream.println(returnData);
+                    yocLogger.log(command, returnData, "INFO");
                     break;
                 case "bye":
                     done = true;
                     this.inputStream.close();
                     this.outputStream.close();
+                    yocLogger.log(command, "Session closed", "INFO");
                     try {
                         this.socket.close();
                     } catch (IOException ex) {
-                        Logger.getLogger(ClientConnThread.class.getName()).log(Level.SEVERE, null, ex);
+                        yocLogger.log(command, ex.getMessage(), "ERR");
                     }
                     break;
                 default:

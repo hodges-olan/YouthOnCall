@@ -6,6 +6,7 @@
 package Server.Control;
 
 import Server.App.YouthOnCallServer;
+import Server.App.yocLogger;
 import Server.Model.Jobs;
 import java.util.List;
 import org.hibernate.Session;
@@ -18,12 +19,14 @@ import org.hibernate.SessionFactory;
 public class JobsControl {
     
     public Integer createJob(Jobs job) {
-        Integer jobID;
+        Integer jobID = null;
         SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             jobID = (Integer) session.save(job);
             session.getTransaction().commit();
+        } catch (Exception ex) {
+            yocLogger.log("createJob", ex.getMessage(), "ERR");
         }
         return jobID;
     }
@@ -34,25 +37,31 @@ public class JobsControl {
             session.beginTransaction();
             session.update(job);
             session.getTransaction().commit();
+        } catch (Exception ex) {
+            yocLogger.log("updateJob", ex.getMessage(), "ERR");
         }
     }
     
     public Jobs retrieveJob(Integer search) {
-        Jobs job;
+        Jobs job = null;
         SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             job = session.get(Jobs.class, search);
+        } catch (Exception ex) {
+            yocLogger.log("retrieveJob", ex.getMessage(), "ERR");
         }
         return job;
     }
     
     public List<Jobs> retrieveAllJobs() {
-        List<Jobs> jobs;
+        List<Jobs> jobs = null;
         SessionFactory sessionFactory = YouthOnCallServer.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             jobs = session.createCriteria(Jobs.class).list();
+        } catch (Exception ex) {
+            yocLogger.log("retrieveAllJobs", ex.getMessage(), "ERR");
         }
         return jobs;
     }

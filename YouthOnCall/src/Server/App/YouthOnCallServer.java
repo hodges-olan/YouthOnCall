@@ -6,6 +6,7 @@
 package Server.App;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -25,6 +26,9 @@ public class YouthOnCallServer {
     // Declare Session Factory
     private static final SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
     
+    // Declare Log Writter
+    private static PrintWriter LOG_FILE = null;
+    
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
@@ -33,6 +37,10 @@ public class YouthOnCallServer {
         
         // Create Server Socket
         ServerSocket serverSocket = new ServerSocket(7890);
+        
+        // Open log file
+        String filePath = "log.txt";
+        YouthOnCallServer.LOG_FILE = new PrintWriter(filePath);
         
         // Await client connections
         while (true) {
@@ -50,6 +58,10 @@ public class YouthOnCallServer {
 
     public static SessionFactory getSessionFactory() {
         return SESSION_FACTORY;
+    }
+
+    public static PrintWriter getLOG_FILE() {
+        return LOG_FILE;
     }
     
 }
