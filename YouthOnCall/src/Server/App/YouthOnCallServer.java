@@ -41,8 +41,7 @@ public class YouthOnCallServer {
         try {
 
             // Create Server Socket
-            ServerSocket serverSocket;
-            serverSocket = new ServerSocket(7890);
+            ServerSocket serverSocket = new ServerSocket(7890);
             
             // Open log file
             String filePath = "log.txt";
