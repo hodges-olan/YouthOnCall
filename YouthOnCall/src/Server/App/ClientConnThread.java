@@ -12,12 +12,9 @@ import Server.Model.Jobs;
 import Server.Model.Members;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -119,6 +116,7 @@ public class ClientConnThread implements Runnable {
                     break;
                 default:
                     outputStream.println("Invalid Command");
+                    yocLogger.log(command, "Invalid Command", "INFO");
                     break;
             }
         }

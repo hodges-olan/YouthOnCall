@@ -18,6 +18,10 @@ public class yocLogger {
     private static final PrintWriter LOG_FILE = YouthOnCallServer.getLOG_FILE();
     
     public static void log(String action, String log, String type) {
-        LOG_FILE.println(new Date() + " - " + type + " - " + action + " - " + log);
+        Date date = new Date();
+        String logEntry = date + " - " + type + " - " + action + " - " + log;
+        LOG_FILE.println(logEntry);
+        System.out.println(logEntry);
     }
+    
 }

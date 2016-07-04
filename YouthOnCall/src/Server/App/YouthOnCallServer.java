@@ -11,6 +11,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -31,21 +33,26 @@ public class YouthOnCallServer {
     
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         
-        // Create Server Socket
-        ServerSocket serverSocket = new ServerSocket(7890);
+        try {
+            // Create Server Socket
+            ServerSocket serverSocket;
+            serverSocket = new ServerSocket(7890);
+            
+            // Open log file
+            String filePath = "log.txt";
+            YouthOnCallServer.LOG_FILE = new PrintWriter(filePath);
         
-        // Open log file
-        String filePath = "log.txt";
-        YouthOnCallServer.LOG_FILE = new PrintWriter(filePath);
-        
-        // Await client connections
-        while (true) {
-            Socket socket = serverSocket.accept();
-            EXECUTOR_SERVICE.submit(new ClientConnThread(socket));
+            // Await client connections
+            while (true) {
+                Socket socket = serverSocket.accept();
+                yocLogger.log("newConnection", "New Connection from " + socket.getRemoteSocketAddress(), "INFO");
+                EXECUTOR_SERVICE.submit(new ClientConnThread(socket));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(YouthOnCallServer.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
