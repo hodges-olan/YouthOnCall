@@ -11,9 +11,14 @@ import Client.Model.Members;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +29,7 @@ public class MembersControl {
     // Define attributes
     String[] columns = {"ID", "Name", "Email", "Address", "City", "State", "Zip", "Phone", "Youth/Member"};
     
-    public void createMember(String name, String email, String address, String city, String st, int zip, String phone, boolean youth) throws IOException {
+    public void createMember(String name, String email, String address, String city, String st, int zip, String phone, boolean youth, String password) throws IOException {
         Members member = new Members();
         member.setName(name);
         member.setEmail(email);
@@ -34,6 +39,7 @@ public class MembersControl {
         member.setZip(zip);
         member.setPhone(phone);
         member.setYouth(youth);
+        member.setPassword(this.hashPassword(password));
         
         Gson membersGSON = new Gson();
         try (Socket socket = new Socket(YouthOnCallClient.SERVER,YouthOnCallClient.PORT)) {
@@ -90,6 +96,23 @@ public class MembersControl {
     
     public String[] retrieveColumns() {
         return columns;
+    }
+
+    private String hashPassword(String password) {
+        String hashedPassword = "nopassword";
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(password.getBytes("UTF-8"));
+            byte[] byteData = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < byteData.length; i++) {
+                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            hashedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            Logger.getLogger(MembersControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hashedPassword;
     }
     
 }

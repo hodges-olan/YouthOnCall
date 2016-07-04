@@ -26,6 +26,7 @@ public class AddMemberUI extends javax.swing.JFrame {
      */
     public AddMemberUI() {
         initComponents();
+        PasswordsFailToMatch.setVisible(false);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
@@ -61,6 +62,7 @@ public class AddMemberUI extends javax.swing.JFrame {
         AddressField = new javax.swing.JTextField();
         EmailField = new javax.swing.JTextField();
         NameField = new javax.swing.JTextField();
+        PasswordsFailToMatch = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,6 +102,10 @@ public class AddMemberUI extends javax.swing.JFrame {
 
         MemberField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Member", "Youth" }));
 
+        PasswordsFailToMatch.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        PasswordsFailToMatch.setForeground(new java.awt.Color(204, 0, 51));
+        PasswordsFailToMatch.setText("Passwords do not match");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,7 +116,9 @@ public class AddMemberUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(SaverButton)
                         .addGap(18, 18, 18)
-                        .addComponent(CancelButton))
+                        .addComponent(CancelButton)
+                        .addGap(74, 74, 74)
+                        .addComponent(PasswordsFailToMatch))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(YouthLabel)
@@ -180,10 +188,11 @@ public class AddMemberUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ConfirmPasswordLabel)
                     .addComponent(ConfirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaverButton)
-                    .addComponent(CancelButton))
+                    .addComponent(CancelButton)
+                    .addComponent(PasswordsFailToMatch))
                 .addContainerGap())
         );
 
@@ -195,6 +204,7 @@ public class AddMemberUI extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void SaverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaverButtonActionPerformed
+        boolean validated = false;
         String name = NameField.getText();
         String email = EmailField.getText();
         String address = AddressField.getText();
@@ -206,12 +216,20 @@ public class AddMemberUI extends javax.swing.JFrame {
         if (MemberField.getSelectedItem() == "Member") {
             youth = false;
         }
+        String password = PasswordField.getText();
+        if (PasswordField.getText().equals(ConfirmPasswordField.getText())) {
+            validated = true;
+        } else {
+            PasswordsFailToMatch.setVisible(true);
+        }
         
-        try {
-            membersController.createMember(name, email, address, city, st, zip, phone, youth);
-            this.dispose();
-        } catch (IOException ex) {
-            Logger.getLogger(AddMemberUI.class.getName()).log(Level.SEVERE, null, ex);
+        if (validated) {
+            try {
+                membersController.createMember(name, email, address, city, st, zip, phone, youth, password);
+                this.dispose();
+            } catch (IOException ex) {
+                Logger.getLogger(AddMemberUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_SaverButtonActionPerformed
 
@@ -264,6 +282,7 @@ public class AddMemberUI extends javax.swing.JFrame {
     private javax.swing.JLabel NameLabel;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel PasswordLabel;
+    private javax.swing.JLabel PasswordsFailToMatch;
     private javax.swing.JTextField PhoneField;
     private javax.swing.JLabel PhoneLabel;
     private javax.swing.JButton SaverButton;
