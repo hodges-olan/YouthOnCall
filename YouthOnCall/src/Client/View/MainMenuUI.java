@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -27,6 +28,7 @@ public class MainMenuUI extends javax.swing.JFrame {
     public MainMenuUI() {
         initComponents();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        JobsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
@@ -194,7 +196,11 @@ public class MainMenuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_AddJobActionPerformed
 
     private void EditJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditJobActionPerformed
-        new EditJobUI().setVisible(true);
+        if (JobsTable.getSelectedRow() != -1) {
+            int job = ((Integer) JobsTable.getValueAt(JobsTable.getSelectedRow(), 0));
+            EditJobUI editJobUI = new EditJobUI(job);
+            editJobUI.setVisible(true);
+        }
     }//GEN-LAST:event_EditJobActionPerformed
 
     /**

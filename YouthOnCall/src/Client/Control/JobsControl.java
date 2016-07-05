@@ -28,12 +28,29 @@ public class JobsControl {
         
     }
     
-    public void updateJob() {
-        
+    public void updateJob(Jobs job) throws IOException {
+        Gson jobGSON = new Gson();
+        try (Socket socket = new Socket(YouthOnCallClient.SERVER, YouthOnCallClient.PORT)) {
+            Scanner inputStream = new Scanner(socket.getInputStream());
+            PrintStream outputStream = new PrintStream(socket.getOutputStream());
+            outputStream.println("updateJob");
+            outputStream.println(jobGSON.toJson(job, Jobs.class));
+        }
     }
     
-    public void retrieveJob() {
-        
+    public Jobs retrieveJob(int jobID) throws IOException {
+        Jobs job;
+        String jobJSON;
+        Gson jobGSON = new Gson();
+        try (Socket socket = new Socket(YouthOnCallClient.SERVER, YouthOnCallClient.PORT)) {
+            Scanner inputStream = new Scanner(socket.getInputStream());
+            PrintStream outputStream = new PrintStream(socket.getOutputStream());
+            outputStream.println("retrieveJob");
+            outputStream.println(jobID);
+            jobJSON = inputStream.nextLine();
+            job = jobGSON.fromJson(jobJSON, Jobs.class);
+        }
+        return job;
     }
     
     public Object[][] retrieveAllJobs() throws IOException {

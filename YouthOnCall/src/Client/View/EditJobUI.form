@@ -25,22 +25,80 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="SaveButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="StatusLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="EstHoursLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="YouthLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="MemberLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="PayLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="DescriptionLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="NameLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="SaveButton" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="CancelButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="389" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="CancelButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="NameField" max="32767" attributes="0"/>
+                  <Component id="DescriptionField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="PayField" max="32767" attributes="0"/>
+                  <Component id="MemberField" max="32767" attributes="0"/>
+                  <Component id="YouthField" max="32767" attributes="0"/>
+                  <Component id="EstHoursField" max="32767" attributes="0"/>
+                  <Component id="StatusField" pref="414" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="JobIDField" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="377" max="32767" attributes="0"/>
+              <Component id="JobIDField" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="NameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="NameField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="DescriptionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DescriptionField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="PayLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="PayField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="MemberLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="MemberField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="YouthLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="YouthField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="EstHoursLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="EstHoursField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="StatusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="StatusField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="SaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="CancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,6 +108,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="CancelButton">
       <Properties>
@@ -58,6 +119,69 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CancelButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="NameLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="DescriptionLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Description:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="PayLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pay:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="MemberLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Member ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="YouthLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Youth ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="EstHoursLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Est. Hours:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="StatusLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Status:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="NameField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="DescriptionField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="PayField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="MemberField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="YouthField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="EstHoursField">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="StatusField">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Active"/>
+            <StringItem index="1" value="Volunteered"/>
+            <StringItem index="2" value="Complete"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="JobIDField">
     </Component>
   </SubComponents>
 </Form>

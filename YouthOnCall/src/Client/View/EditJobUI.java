@@ -5,8 +5,13 @@
  */
 package Client.View;
 
+import Client.Control.JobsControl;
+import Client.Model.Jobs;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,11 +19,38 @@ import java.awt.Toolkit;
  */
 public class EditJobUI extends javax.swing.JFrame {
     
+    // Instantiate variables
+    JobsControl jobController = new JobsControl();
+    
     /**
      * Creates new form EditJobUI
+     * @param jobID
      */
-    public EditJobUI() {
+    public EditJobUI(int jobID) {
         initComponents();
+        JobIDField.setVisible(false);
+        try {
+            Jobs job = jobController.retrieveJob(jobID);
+            this.JobIDField.setText(Integer.toString(jobID));
+            this.NameField.setText(job.getName());
+            this.DescriptionField.setText(job.getDescription());
+            this.PayField.setText(Double.toString(job.getPay()));
+            this.MemberField.setText(Integer.toString(job.getMemberID()));
+            this.YouthField.setText(Integer.toString(job.getYouthID()));
+            this.EstHoursField.setText(Integer.toString(job.getEstHours()));
+            switch (job.getStatus()) {
+                case "Active":
+                    this.StatusField.setSelectedIndex(0);
+                    break;
+                case "Volunteered":
+                    this.StatusField.setSelectedIndex(1);
+                    break;
+                default:
+                    this.StatusField.setSelectedIndex(2);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(EditJobUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
@@ -34,10 +66,30 @@ public class EditJobUI extends javax.swing.JFrame {
 
         SaveButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
+        NameLabel = new javax.swing.JLabel();
+        DescriptionLabel = new javax.swing.JLabel();
+        PayLabel = new javax.swing.JLabel();
+        MemberLabel = new javax.swing.JLabel();
+        YouthLabel = new javax.swing.JLabel();
+        EstHoursLabel = new javax.swing.JLabel();
+        StatusLabel = new javax.swing.JLabel();
+        NameField = new javax.swing.JTextField();
+        DescriptionField = new javax.swing.JTextField();
+        PayField = new javax.swing.JTextField();
+        MemberField = new javax.swing.JTextField();
+        YouthField = new javax.swing.JTextField();
+        EstHoursField = new javax.swing.JTextField();
+        StatusField = new javax.swing.JComboBox<>();
+        JobIDField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         SaveButton.setText("Save");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveButtonActionPerformed(evt);
+            }
+        });
 
         CancelButton.setText("Cancel");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -46,25 +98,89 @@ public class EditJobUI extends javax.swing.JFrame {
             }
         });
 
+        NameLabel.setText("Name:");
+
+        DescriptionLabel.setText("Description:");
+
+        PayLabel.setText("Pay:");
+
+        MemberLabel.setText("Member ID:");
+
+        YouthLabel.setText("Youth ID:");
+
+        EstHoursLabel.setText("Est. Hours:");
+
+        StatusLabel.setText("Status:");
+
+        StatusField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Volunteered", "Complete" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(SaveButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(StatusLabel)
+                    .addComponent(EstHoursLabel)
+                    .addComponent(YouthLabel)
+                    .addComponent(MemberLabel)
+                    .addComponent(PayLabel)
+                    .addComponent(DescriptionLabel)
+                    .addComponent(NameLabel)
+                    .addComponent(SaveButton))
                 .addGap(18, 18, 18)
-                .addComponent(CancelButton)
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(CancelButton)
+                    .addComponent(NameField)
+                    .addComponent(DescriptionField)
+                    .addComponent(PayField)
+                    .addComponent(MemberField)
+                    .addComponent(YouthField)
+                    .addComponent(EstHoursField)
+                    .addComponent(StatusField, 0, 414, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JobIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(377, Short.MAX_VALUE)
+                .addComponent(JobIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NameLabel)
+                    .addComponent(NameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DescriptionLabel)
+                    .addComponent(DescriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PayLabel)
+                    .addComponent(PayField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MemberLabel)
+                    .addComponent(MemberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(YouthLabel)
+                    .addComponent(YouthField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EstHoursLabel)
+                    .addComponent(EstHoursField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StatusLabel)
+                    .addComponent(StatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaveButton)
                     .addComponent(CancelButton))
-                .addContainerGap())
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -73,6 +189,33 @@ public class EditJobUI extends javax.swing.JFrame {
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_CancelButtonActionPerformed
+
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+        Jobs job = new Jobs();
+        job.setId(Integer.parseInt(JobIDField.getText()));
+        job.setName(NameField.getText());
+        job.setDescription(DescriptionField.getText());
+        job.setPay(Double.parseDouble(PayField.getText()));
+        job.setMemberID(Integer.parseInt(MemberField.getText()));
+        job.setYouthID(Integer.parseInt(YouthField.getText()));
+        job.setEstHours(Integer.parseInt(EstHoursField.getText()));
+        switch (StatusField.getSelectedIndex()) {
+                case 0:
+                    job.setStatus("Active");
+                    break;
+                case 1:
+                    job.setStatus("Volunteered");
+                    break;
+                default:
+                    job.setStatus("Complete");
+            }
+        try {
+            jobController.updateJob(job);
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(EditJobUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_SaveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -101,14 +244,29 @@ public class EditJobUI extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new EditJobUI().setVisible(true);
-        });
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> {
+//            new EditJobUI().setVisible(true);
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
+    private javax.swing.JTextField DescriptionField;
+    private javax.swing.JLabel DescriptionLabel;
+    private javax.swing.JTextField EstHoursField;
+    private javax.swing.JLabel EstHoursLabel;
+    private javax.swing.JTextField JobIDField;
+    private javax.swing.JTextField MemberField;
+    private javax.swing.JLabel MemberLabel;
+    private javax.swing.JTextField NameField;
+    private javax.swing.JLabel NameLabel;
+    private javax.swing.JTextField PayField;
+    private javax.swing.JLabel PayLabel;
     private javax.swing.JButton SaveButton;
+    private javax.swing.JComboBox<String> StatusField;
+    private javax.swing.JLabel StatusLabel;
+    private javax.swing.JTextField YouthField;
+    private javax.swing.JLabel YouthLabel;
     // End of variables declaration//GEN-END:variables
 }

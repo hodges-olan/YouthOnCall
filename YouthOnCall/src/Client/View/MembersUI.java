@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -27,6 +28,7 @@ public class MembersUI extends javax.swing.JFrame {
     public MembersUI() {
         initComponents();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        MembersTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
