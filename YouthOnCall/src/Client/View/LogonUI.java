@@ -160,6 +160,7 @@ public class LogonUI extends javax.swing.JFrame {
                 socket.close();
                 this.dispose();
                 new MainMenuUI().setVisible(true);
+                new MessageOfTheDay().setVisible(true);
             } else {
                 AuthFailedLabel.setVisible(true);
             }
