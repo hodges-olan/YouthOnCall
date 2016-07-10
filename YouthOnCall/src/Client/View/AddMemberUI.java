@@ -40,7 +40,7 @@ public class AddMemberUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SaverButton = new javax.swing.JButton();
+        SaveButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
         NameLabel = new javax.swing.JLabel();
         EmailLabel = new javax.swing.JLabel();
@@ -66,10 +66,10 @@ public class AddMemberUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        SaverButton.setText("Save");
-        SaverButton.addActionListener(new java.awt.event.ActionListener() {
+        SaveButton.setText("Save");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaverButtonActionPerformed(evt);
+                SaveButtonActionPerformed(evt);
             }
         });
 
@@ -114,7 +114,7 @@ public class AddMemberUI extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(SaverButton)
+                        .addComponent(SaveButton)
                         .addGap(18, 18, 18)
                         .addComponent(CancelButton)
                         .addGap(74, 74, 74)
@@ -190,7 +190,7 @@ public class AddMemberUI extends javax.swing.JFrame {
                     .addComponent(ConfirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SaverButton)
+                    .addComponent(SaveButton)
                     .addComponent(CancelButton)
                     .addComponent(PasswordsFailToMatch))
                 .addContainerGap())
@@ -203,7 +203,7 @@ public class AddMemberUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_CancelButtonActionPerformed
 
-    private void SaverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaverButtonActionPerformed
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         boolean validated = false;
         String name = NameField.getText();
         String email = EmailField.getText();
@@ -231,7 +231,7 @@ public class AddMemberUI extends javax.swing.JFrame {
                 Logger.getLogger(AddMemberUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_SaverButtonActionPerformed
+    }//GEN-LAST:event_SaveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,7 +285,7 @@ public class AddMemberUI extends javax.swing.JFrame {
     private javax.swing.JLabel PasswordsFailToMatch;
     private javax.swing.JTextField PhoneField;
     private javax.swing.JLabel PhoneLabel;
-    private javax.swing.JButton SaverButton;
+    private javax.swing.JButton SaveButton;
     private javax.swing.JTextField StateField;
     private javax.swing.JLabel StateLabel;
     private javax.swing.JLabel YouthLabel;
