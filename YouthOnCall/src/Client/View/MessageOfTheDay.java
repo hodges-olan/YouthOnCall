@@ -6,6 +6,8 @@
 package Client.View;
 
 import Client.Control.MotdControl;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  *
@@ -21,6 +23,8 @@ public class MessageOfTheDay extends javax.swing.JFrame {
      */
     public MessageOfTheDay() {
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         MotdTextArea.setText(motdController.getMotd());
         MotdTextArea.setEditable(false);
         MotdTextArea.setLineWrap(true);

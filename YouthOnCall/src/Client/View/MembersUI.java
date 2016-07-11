@@ -141,7 +141,11 @@ public class MembersUI extends javax.swing.JFrame {
     }//GEN-LAST:event_AddMemberActionPerformed
 
     private void EditMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditMemberActionPerformed
-        new EditMemberUI().setVisible(true);
+        if (MembersTable.getSelectedRow() != -1) {
+            int member = ((Integer) MembersTable.getValueAt(MembersTable.getSelectedRow(), 0));
+            EditMemberUI editMemberUI = new EditMemberUI(member);
+            editMemberUI.setVisible(true);
+        }
     }//GEN-LAST:event_EditMemberActionPerformed
 
     private void MembersRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MembersRefreshButtonActionPerformed

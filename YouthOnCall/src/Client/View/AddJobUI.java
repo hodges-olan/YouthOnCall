@@ -5,8 +5,13 @@
  */
 package Client.View;
 
+import Client.Control.JobsControl;
+import Client.Model.Jobs;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,6 +19,9 @@ import java.awt.Toolkit;
  */
 public class AddJobUI extends javax.swing.JFrame {
 
+    // Instantiate variables
+    JobsControl jobController = new JobsControl();
+    
     /**
      * Creates new form AddJobUI
      */
@@ -48,6 +56,11 @@ public class AddJobUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         SaveButton.setText("Save");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveButtonActionPerformed(evt);
+            }
+        });
 
         CancelButton.setText("Cancel");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +79,7 @@ public class AddJobUI extends javax.swing.JFrame {
 
         jLabel5.setText("Status:");
 
-        StatusField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Accepted", "Complete" }));
+        StatusField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Volunteered", "Complete" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,6 +144,30 @@ public class AddJobUI extends javax.swing.JFrame {
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_CancelButtonActionPerformed
+
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+        String name = JobNameField.getText();
+        String description = JobDescriptionField.getText();
+        double pay = Double.parseDouble(PayField.getText());
+        int memberID = 24;
+        int youthID = 0;
+        int estHours = Integer.parseInt(EstHoursField.getText());
+        String status = "Complete";
+        switch (StatusField.getSelectedIndex()) {
+                case 0:
+                    status = "Active";
+                    break;
+                case 1:
+                    status = "Volunteered";
+                    break;
+            }
+        try {
+            jobController.createJob(name, description, pay, memberID, youthID, estHours, status);
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(EditJobUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_SaveButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -24,8 +24,23 @@ public class JobsControl {
     // Define attributes
     String[] columns = {"ID", "Job", "Description", "Pay", "Member", "Youth", "Est. Hours", "Status"};
     
-    public void createJob() {
+    public void createJob(String name, String description, double pay, int memberID, int youthID, int estHours, String status) throws IOException {
+        Jobs job = new Jobs();
+        job.setName(name);
+        job.setDescription(description);
+        job.setPay(pay);
+        job.setMemberID(memberID);
+        job.setYouthID(youthID);
+        job.setEstHours(estHours);
+        job.setStatus(status);
         
+        Gson jobsGSON = new Gson();
+        try (Socket socket = new Socket(YouthOnCallClient.SERVER,YouthOnCallClient.PORT)) {
+            Scanner inputStream = new Scanner(socket.getInputStream());
+            PrintStream outputStream = new PrintStream(socket.getOutputStream());
+            outputStream.println("createJob");
+            outputStream.println(jobsGSON.toJson(job));
+        }
     }
     
     public void updateJob(Jobs job) throws IOException {

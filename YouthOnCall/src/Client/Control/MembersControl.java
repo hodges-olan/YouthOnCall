@@ -50,12 +50,29 @@ public class MembersControl {
         }
     }
     
-    public void updateMember() {
-        
+    public void updateMember(Members member) throws IOException {
+        Gson memberGSON = new Gson();
+        try (Socket socket = new Socket(YouthOnCallClient.SERVER, YouthOnCallClient.PORT)) {
+            Scanner inputStream = new Scanner(socket.getInputStream());
+            PrintStream outputStream = new PrintStream(socket.getOutputStream());
+            outputStream.println("updateMember");
+            outputStream.println(memberGSON.toJson(member, Members.class));
+        }
     }
     
-    public void retrieveMember() {
-        
+    public Members retrieveMember(int memberID) throws IOException {
+        Members member;
+        String memberJSON;
+        Gson memberGSON = new Gson();
+        try (Socket socket = new Socket(YouthOnCallClient.SERVER, YouthOnCallClient.PORT)) {
+            Scanner inputStream = new Scanner(socket.getInputStream());
+            PrintStream outputStream = new PrintStream(socket.getOutputStream());
+            outputStream.println("retrieveMember");
+            outputStream.println(memberID);
+            memberJSON = inputStream.nextLine();
+            member = memberGSON.fromJson(memberJSON, Members.class);
+        }
+        return member;
     }
     
     public Object[][] retrieveAllMembers() throws IOException {
